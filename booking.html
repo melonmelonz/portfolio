@@ -186,7 +186,7 @@
 Subject: request to book time</div>
       <h1>book time with me</h1>
       <p class="subtitle">async &middot; no calendar links &middot; just email</p>
-      <p>propose a time that works for you and drop a quick note. it lands in my inbox and i'll reply from <span style="color:var(--amber)">lushfund@protonmail.ch</span> to lock it in. backups help if my first slot is taken.</p>
+      <p>propose a time that works for you and drop a quick note. hit send and it opens in your email app, addressed to me &mdash; give it a final look and send. i'll reply from <span style="color:var(--amber)">lushfund@protonmail.ch</span> to lock it in. backups help if my first slot is taken.</p>
     </div>
 
     <form id="booking-form" class="compose" novalidate>
@@ -235,15 +235,15 @@ Subject: request to book time</div>
       <div class="form-error" id="form-error"></div>
 
       <div class="compose-footer">
-        <span class="compose-note">// goes straight to penn's inbox</span>
-        <button type="submit" class="send-btn" id="send-btn">send request &#10148;</button>
+        <span class="compose-note">// opens your email app, addressed to penn</span>
+        <button type="submit" class="send-btn" id="send-btn">open in email &#10148;</button>
       </div>
     </form>
 
     <div class="compose sent-state" id="sent-state">
-      <div class="check">&#10003;</div>
-      <h2>request sent</h2>
-      <p>thanks — your booking request is in Penn's inbox. you'll get a reply from <span style="color:var(--amber)">lushfund@protonmail.ch</span> to confirm the time. check your spam folder if it's quiet.</p>
+      <div class="check">&#9993;</div>
+      <h2>check your email app</h2>
+      <p>your request should have opened in your email app, pre-filled and addressed to Penn &mdash; just hit send. didn't open? <a id="mailto-manual" href="#" style="color:var(--amber)">click here to send it</a>. Penn will reply from <span style="color:var(--amber)">lushfund@protonmail.ch</span> to confirm.</p>
       <a href="/" class="back">&#9664; back to site</a>
     </div>
   </main>
@@ -290,6 +290,7 @@ Subject: request to book time</div>
           company: form.company.value // honeypot
         };
 
+        if (data.company) return; // bot
         if (!data.name || !data.email || !data.when || !data.note) {
           showError('please fill in your name, email, a preferred time, and a message.');
           return;
@@ -299,35 +300,17 @@ Subject: request to book time</div>
           return;
         }
 
-        btn.disabled = true;
-        btn.textContent = 'sending…';
+        var link = mailtoFallback(data);
+        // wire the manual "click here" backup in the confirmation state
+        var manual = document.getElementById('mailto-manual');
+        if (manual) manual.setAttribute('href', link);
 
-        fetch('/api/booking', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        })
-          .then(function (res) {
-            return res.json().catch(function () { return {}; }).then(function (body) {
-              return { ok: res.ok, body: body };
-            });
-          })
-          .then(function (r) {
-            if (r.ok && r.body.ok) {
-              form.style.display = 'none';
-              sent.classList.add('show');
-              return;
-            }
-            throw new Error((r.body && r.body.error) || 'send failed');
-          })
-          .catch(function (err) {
-            btn.disabled = false;
-            btn.innerHTML = 'send request &#10148;';
-            showError(
-              (err.message || 'something went wrong') +
-              '. you can <a href="' + mailtoFallback(data) + '">email Penn directly instead</a>.'
-            );
-          });
+        // open the user's email app, pre-filled
+        window.location.href = link;
+
+        // show the confirmation / instruction state
+        form.style.display = 'none';
+        sent.classList.add('show');
       });
     })();
   </script>
