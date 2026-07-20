@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>book with penn</title>
+  <meta name="description" content="Book time with Penn Cameron Porterfield.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⬡</text></svg>">
+  <style>
+    /* ── Booking / compose window ──────────────────────────── */
+    .booking-wrap {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+    .booking-intro { margin-bottom: 2rem; }
+    .booking-intro h1 {
+      font-size: clamp(1.4rem, 4vw, 2rem);
+      font-weight: 700;
+      color: var(--text-bright);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .booking-intro .subtitle {
+      font-size: 0.82rem;
+      color: var(--amber);
+      text-shadow: 0 0 10px var(--amber-glow);
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+    .booking-intro p {
+      color: var(--text);
+      font-size: 0.78rem;
+      line-height: 2;
+      max-width: 520px;
+    }
+
+    .compose {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: var(--surface);
+      box-shadow: 0 0 40px rgba(0,0,0,0.5);
+      overflow: hidden;
+    }
+    .compose-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.9rem;
+      background: rgba(138,155,174,0.06);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      letter-spacing: 0.06em;
+    }
+    .compose-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--text-muted); opacity: 0.4; }
+    .compose-dot.amber { background: var(--amber); opacity: 0.7; }
+    .compose-title { margin-left: 0.4rem; }
+
+    .compose-body { padding: 0.5rem 0; }
+
+    .field {
+      display: flex;
+      align-items: baseline;
+      border-bottom: 1px solid var(--border);
+      padding: 0 1rem;
+    }
+    .field.stacked { flex-direction: column; align-items: stretch; }
+    .field:last-of-type { border-bottom: none; }
+    .field label {
+      flex: 0 0 92px;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      padding: 0.85rem 0;
+      user-select: none;
+    }
+    .field.stacked label { flex: none; padding-bottom: 0.3rem; }
+
+    .field input,
+    .field textarea {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text-bright);
+      font-family: inherit;
+      font-size: 0.78rem;
+      padding: 0.85rem 0;
+      line-height: 1.7;
+      width: 100%;
+    }
+    .field textarea { resize: vertical; min-height: 96px; padding-top: 0; }
+    .field input::placeholder,
+    .field textarea::placeholder { color: var(--text-muted); opacity: 0.55; }
+    .field input:focus,
+    .field textarea:focus { color: #fff; }
+
+    /* honeypot — hidden from humans */
+    .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+    .field-row { display: flex; gap: 0.75rem; }
+    .field-row .field { flex: 1; }
+
+    .compose-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .compose-note { font-size: 0.68rem; color: var(--text-muted); }
+
+    .send-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.6rem;
+      font-family: inherit;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      background: var(--accent);
+      color: var(--bg);
+      border: 1px solid var(--accent);
+      border-radius: 1px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .send-btn:hover:not(:disabled) { box-shadow: 0 0 14px var(--accent-glow); }
+    .send-btn:disabled { opacity: 0.5; cursor: wait; }
+
+    .form-error {
+      color: #d98b8b;
+      font-size: 0.72rem;
+      padding: 0.75rem 1rem 0;
+      display: none;
+    }
+    .form-error.show { display: block; }
+    .form-error a { color: var(--amber); }
+
+    /* success state */
+    .sent-state { display: none; padding: 3rem 1.5rem; text-align: center; }
+    .sent-state.show { display: block; }
+    .sent-state .check {
+      font-size: 2.4rem;
+      color: var(--amber);
+      text-shadow: 0 0 20px var(--amber-glow);
+      margin-bottom: 1rem;
+    }
+    .sent-state h2 { color: var(--text-bright); font-size: 1rem; margin-bottom: 0.6rem; letter-spacing: 0.04em; }
+    .sent-state p { color: var(--text); font-size: 0.76rem; line-height: 1.9; max-width: 380px; margin: 0 auto; }
+    .sent-state .back { display: inline-block; margin-top: 1.5rem; color: var(--amber); text-decoration: none; font-size: 0.72rem; }
+    .sent-state .back:hover { text-decoration: underline; }
+
+    @media (max-width: 560px) {
+      .field { flex-direction: column; align-items: stretch; padding: 0 0.9rem; }
+      .field label { flex: none; padding-bottom: 0.2rem; }
+      .field input, .field textarea { padding: 0.3rem 0 0.85rem; }
+      .field-row { flex-direction: column; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <a href="/" class="nav-brand">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/watmel-berry.png" width="20" height="20" alt="melon" style="image-rendering: pixelated;">
+      <span>pcporterfield</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/#about">about</a></li>
+      <li><a href="/#projects">projects</a></li>
+      <li><a href="/cv">resume</a></li>
+      <li><a href="/booking" class="active">book</a></li>
+    </ul>
+  </nav>
+
+  <main class="booking-wrap">
+    <div class="booking-intro">
+      <div class="hero-header">To:      Penn Cameron Porterfield &lt;bookings@goolz.org&gt;
+Subject: request to book time</div>
+      <h1>book time with me</h1>
+      <p class="subtitle">async &middot; no calendar links &middot; just email</p>
+      <p>propose a time that works for you and drop a quick note. it lands in my inbox and i'll reply from <span style="color:var(--amber)">lushfund@protonmail.ch</span> to lock it in. backups help if my first slot is taken.</p>
+    </div>
+
+    <form id="booking-form" class="compose" novalidate>
+      <div class="compose-titlebar">
+        <span class="compose-dot amber"></span>
+        <span class="compose-dot"></span>
+        <span class="compose-dot"></span>
+        <span class="compose-title">new booking request</span>
+      </div>
+
+      <div class="compose-body">
+        <div class="field">
+          <label for="name">From</label>
+          <input type="text" id="name" name="name" placeholder="your name" autocomplete="name" maxlength="120" required>
+        </div>
+        <div class="field">
+          <label for="email">Reply-To</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email" maxlength="200" required>
+        </div>
+        <div class="field">
+          <label for="when">When</label>
+          <input type="text" id="when" name="when" placeholder="e.g. Tue Jul 28, 2pm ET" maxlength="160" required>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="alt1">Backup 1</label>
+            <input type="text" id="alt1" name="alt1" placeholder="optional" maxlength="160">
+          </div>
+          <div class="field">
+            <label for="alt2">Backup 2</label>
+            <input type="text" id="alt2" name="alt2" placeholder="optional" maxlength="160">
+          </div>
+        </div>
+        <div class="field stacked">
+          <label for="note">Message</label>
+          <textarea id="note" name="note" placeholder="what's this about? anything i should know beforehand?" maxlength="2000" required></textarea>
+        </div>
+
+        <!-- honeypot: bots fill this, humans never see it -->
+        <div class="hp" aria-hidden="true">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" tabindex="-1" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="form-error" id="form-error"></div>
+
+      <div class="compose-footer">
+        <span class="compose-note">// goes straight to penn's inbox</span>
+        <button type="submit" class="send-btn" id="send-btn">send request &#10148;</button>
+      </div>
+    </form>
+
+    <div class="compose sent-state" id="sent-state">
+      <div class="check">&#10003;</div>
+      <h2>request sent</h2>
+      <p>thanks — your booking request is in Penn's inbox. you'll get a reply from <span style="color:var(--amber)">lushfund@protonmail.ch</span> to confirm the time. check your spam folder if it's quiet.</p>
+      <a href="/" class="back">&#9664; back to site</a>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      var form = document.getElementById('booking-form');
+      var errBox = document.getElementById('form-error');
+      var sent = document.getElementById('sent-state');
+      var btn = document.getElementById('send-btn');
+
+      function showError(html) {
+        errBox.innerHTML = html;
+        errBox.classList.add('show');
+      }
+      function clearError() {
+        errBox.classList.remove('show');
+        errBox.innerHTML = '';
+      }
+      function mailtoFallback(data) {
+        var subject = 'Booking request from ' + (data.name || 'someone');
+        var body =
+          'Name: ' + (data.name || '') + '\n' +
+          'Email: ' + (data.email || '') + '\n' +
+          'Preferred time: ' + (data.when || '') + '\n' +
+          'Backup 1: ' + (data.alt1 || '') + '\n' +
+          'Backup 2: ' + (data.alt2 || '') + '\n\n' +
+          (data.note || '');
+        return 'mailto:lushfund@protonmail.ch?subject=' +
+          encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        clearError();
+
+        var data = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          when: form.when.value.trim(),
+          alt1: form.alt1.value.trim(),
+          alt2: form.alt2.value.trim(),
+          note: form.note.value.trim(),
+          company: form.company.value // honeypot
+        };
+
+        if (!data.name || !data.email || !data.when || !data.note) {
+          showError('please fill in your name, email, a preferred time, and a message.');
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+          showError('that email address doesn\'t look right — double-check it.');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'sending…';
+
+        fetch('/api/booking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+          .then(function (res) {
+            return res.json().catch(function () { return {}; }).then(function (body) {
+              return { ok: res.ok, body: body };
+            });
+          })
+          .then(function (r) {
+            if (r.ok && r.body.ok) {
+              form.style.display = 'none';
+              sent.classList.add('show');
+              return;
+            }
+            throw new Error((r.body && r.body.error) || 'send failed');
+          })
+          .catch(function (err) {
+            btn.disabled = false;
+            btn.innerHTML = 'send request &#10148;';
+            showError(
+              (err.message || 'something went wrong') +
+              '. you can <a href="' + mailtoFallback(data) + '">email Penn directly instead</a>.'
+            );
+          });
+      });
+    })();
+  </script>
+</body>
+</html>

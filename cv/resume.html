@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penn Cameron Porterfield &mdash; Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --aqua:       #34b8cb;
+      --teal:       #1f8fa0;
+      --text-dark:  #162e3a;
+      --text-mid:   #3a5a6e;
+      --text-soft:  #7090a0;
+      --rule:       rgba(52,184,203,0.18);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 9pt;
+      color: var(--text-dark);
+      background: #f0f8fc;
+      padding: 2rem;
+    }
+
+    /* Screen: show it centered on a page-like card */
+    @media screen {
+      body { min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; }
+      .page {
+        width: min(8.27in, 100%);
+        min-height: 11in;
+        background: #fff;
+        border: 1px solid rgba(52,184,203,0.22);
+        border-radius: 12px;
+        box-shadow: 0 8px 40px rgba(40,150,175,0.14), 0 1px 6px rgba(40,160,185,0.08);
+        overflow: hidden;
+      }
+    }
+
+    /* Mobile */
+    @media screen and (max-width: 640px) {
+      body { padding: 0; background: #fff; }
+      .page { min-height: unset; border-radius: 0; border: none; box-shadow: none; }
+      .columns { grid-template-columns: 1fr; }
+      .sidebar { border-right: none; border-bottom: 1px solid rgba(52,184,203,0.14); }
+      .r-job-top { flex-direction: column; gap: 0.1rem; }
+      .r-dates { white-space: normal; }
+    }
+
+    @media print {
+      body { background: #fff; padding: 0; }
+      .page { width: 100%; box-shadow: none; border: none; border-radius: 0; }
+      .no-print { display: none !important; }
+      .print-footer { display: block !important; }
+      @page { margin: 0.45in 0.55in; size: letter; }
+    }
+
+    /* ── Print footer ────────────────────────── */
+    .print-footer {
+      display: none;
+      text-align: center;
+      padding: 0.5rem 1.5rem 0.4rem;
+      font-size: 7pt;
+      color: var(--text-soft);
+      border-top: 1px solid rgba(52,184,203,0.14);
+    }
+
+    /* ── Print button (screen only) ─────────── */
+    .print-bar {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0.8rem 1.2rem 0;
+    }
+
+    .print-btn {
+      padding: 0.3rem 1rem;
+      background: rgba(52,184,203,0.12);
+      border: 1px solid rgba(52,184,203,0.30);
+      border-radius: 999px;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--teal);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .print-btn:hover { background: rgba(52,184,203,0.22); }
+
+    /* ── Header ─────────────────────────────── */
+    .resume-header {
+      padding: 1.0rem 1.5rem 0.8rem;
+      border-bottom: 2px solid var(--aqua);
+      background: linear-gradient(175deg, #eaf7fb 0%, #f4fbfd 100%);
+      position: relative;
+    }
+
+    .resume-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--aqua), #7dd8e8);
+    }
+
+    .rh-name {
+      font-size: 19pt;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      line-height: 1.1;
+    }
+
+    .rh-title {
+      margin-top: 0.25rem;
+      font-size: 10pt;
+      font-weight: 400;
+      color: var(--teal);
+    }
+
+    .rh-contact {
+      margin-top: 0.45rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.4rem;
+      font-size: 8pt;
+      color: var(--text-soft);
+    }
+
+    .rh-contact a {
+      color: var(--text-soft);
+      text-decoration: none;
+    }
+
+    /* ── Two-column layout ──────────────────── */
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 2.2fr;
+    }
+
+    /* ── Sidebar ────────────────────────────── */
+    .sidebar {
+      padding: 0.9rem 1.0rem 1.0rem 1.2rem;
+      border-right: 1px solid rgba(52,184,203,0.14);
+      background: linear-gradient(180deg, #f4fbfd 0%, #f8fdfe 100%);
+    }
+
+    /* ── Main ───────────────────────────────── */
+    .main {
+      padding: 0.9rem 1.2rem 1.0rem 1.0rem;
+    }
+
+    /* ── Section ────────────────────────────── */
+    .r-section {
+      margin-bottom: 0.85rem;
+    }
+
+    .r-section:last-child { margin-bottom: 0; }
+
+    .r-title {
+      font-size: 6.5pt;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── Summary ────────────────────────────── */
+    .r-summary {
+      font-size: 8pt;
+      line-height: 1.6;
+      color: var(--text-mid);
+    }
+
+    /* ── Jobs ───────────────────────────────── */
+    .r-job {
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid rgba(52,184,203,0.10);
+      padding-left: 0.7rem;
+      border-left: 2px solid rgba(52,184,203,0.28);
+    }
+
+    .r-job:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+    .r-job-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .r-company {
+      font-size: 9pt;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .r-company-sub {
+      font-weight: 300;
+      color: var(--text-soft);
+    }
+
+    .r-dates {
+      font-size: 7.5pt;
+      color: var(--text-soft);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .r-role {
+      font-size: 8pt;
+      font-weight: 400;
+      color: var(--teal);
+      margin-top: 0.08rem;
+    }
+
+    .r-desc {
+      margin-top: 0.2rem;
+      font-size: 7.5pt;
+      line-height: 1.55;
+      color: var(--text-mid);
+    }
+
+    /* ── Edu / Cert items ───────────────────── */
+    .r-edu {
+      margin-bottom: 0.45rem;
+    }
+
+    .r-edu:last-child { margin-bottom: 0; }
+
+    .r-edu-school {
+      font-size: 8.5pt;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .r-edu-meta {
+      font-size: 7.5pt;
+      color: var(--text-mid);
+      margin-top: 0.05rem;
+    }
+
+    .r-edu-dates {
+      font-size: 7pt;
+      color: var(--text-soft);
+    }
+
+    .badge {
+      display: inline-block;
+      margin-left: 0.3rem;
+      padding: 0.08rem 0.4rem;
+      background: rgba(52,184,203,0.10);
+      border: 1px solid rgba(52,184,203,0.26);
+      border-radius: 999px;
+      font-size: 6.5pt;
+      font-weight: 500;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
+
+    /* ── Tags ───────────────────────────────── */
+    .r-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .r-tag {
+      padding: 0.18rem 0.6rem;
+      background: #eaf7fb;
+      border: 1px solid rgba(52,184,203,0.22);
+      border-radius: 999px;
+      font-size: 7.5pt;
+      color: var(--text-mid);
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="print-bar no-print">
+    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+  </div>
+
+  <header class="resume-header">
+    <div class="rh-name">Penn Cameron Porterfield</div>
+    <div class="rh-title">Senior Cloud &amp; Software Engineer</div>
+    <div class="rh-contact">
+      <a href="mailto:fundlush@proton.me">fundlush@proton.me</a>
+      <a href="https://penn.goolz.org">penn.goolz.org</a>
+      <a href="https://github.com/melonmelonz">github.com/melonmelonz</a>
+      <span>Eastern Time</span>
+      <span class="no-print" style="font-style:italic;opacity:0.6;" title="OpSec &amp; privacy — intentionally not on LinkedIn">no LinkedIn (by design)</span>
+    </div>
+  </header>
+
+  <div class="columns">
+
+    <!-- ── Sidebar ───────────────────────── -->
+    <aside class="sidebar">
+
+      <div class="r-section">
+        <div class="r-title">Education</div>
+
+        <div class="r-edu">
+          <div class="r-edu-school">Western Governors University</div>
+          <div class="r-edu-meta">B.S. Network &amp; Cloud Engineering <span class="badge">In Progress</span></div>
+        </div>
+
+        <div class="r-edu">
+          <div class="r-edu-school">Penn State University</div>
+          <div class="r-edu-meta">Computer Engineering, 3 years</div>
+          <div class="r-edu-dates">2009 &ndash; 2013</div>
+        </div>
+      </div>
+
+      <div class="r-section">
+        <div class="r-title">Certifications</div>
+        <div class="r-edu">
+          <div class="r-edu-school">CompTIA Security+</div>
+        </div>
+        <div class="r-edu">
+          <div class="r-edu-school">CompTIA Network+</div>
+        </div>
+      </div>
+
+      <div class="r-section">
+        <div class="r-title">Skills</div>
+        <div class="r-tags">
+          <span class="r-tag">JavaScript</span>
+          <span class="r-tag">TypeScript</span>
+          <span class="r-tag">React</span>
+          <span class="r-tag">Vue</span>
+          <span class="r-tag">PHP</span>
+          <span class="r-tag">Laravel</span>
+          <span class="r-tag">Python</span>
+          <span class="r-tag">Linux</span>
+          <span class="r-tag">Bash</span>
+          <span class="r-tag">Cloud Infra</span>
+          <span class="r-tag">AWS</span>
+          <span class="r-tag">Azure</span>
+          <span class="r-tag">GCP</span>
+          <span class="r-tag">Cloudflare</span>
+          <span class="r-tag">Docker</span>
+          <span class="r-tag">Kubernetes</span>
+          <span class="r-tag">CI/CD</span>
+          <span class="r-tag">DNS / Networking</span>
+          <span class="r-tag">S3 / Object Storage</span>
+          <span class="r-tag">Unity</span>
+          <span class="r-tag">MATLAB</span>
+        </div>
+      </div>
+
+      <div class="r-section">
+        <div class="r-title">Interests</div>
+        <div class="r-tags">
+          <span class="r-tag">Music</span>
+          <span class="r-tag">Travel</span>
+          <span class="r-tag">Cooking</span>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ── Main ──────────────────────────── -->
+    <main class="main">
+
+      <div class="r-section">
+        <div class="r-title">Summary</div>
+        <p class="r-summary">Senior cloud engineer and full-stack developer with 8+ years of experience across independent consulting, agency work, and venture-backed startups. Focused on cloud architecture, DevOps, and end-to-end delivery of production systems on AWS, Azure, and GCP. Background includes DARPA-funded DoD research, ecommerce, and production work for Google. Currently completing a B.S. in Network and Cloud Engineering at WGU.</p>
+      </div>
+
+      <div class="r-section">
+        <div class="r-title">Experience</div>
+
+        <div class="r-job">
+          <div class="r-job-top">
+            <div class="r-company">Samwise Development</div>
+            <div class="r-dates">2022 &ndash; Present</div>
+          </div>
+          <div class="r-role">Founder &mdash; Cloud &amp; Software Consultancy</div>
+          <div class="r-desc">Cloud and software development consultancy serving clients across industries. Full-stack development, cloud infrastructure, and end-to-end project delivery at any scale.</div>
+        </div>
+
+        <div class="r-job">
+          <div class="r-job-top">
+            <div class="r-company">Google IO <span class="r-company-sub">&mdash; Contract</span></div>
+            <div class="r-dates">2021 &ndash; 2022</div>
+          </div>
+          <div class="r-role">Full Stack Developer &mdash; Remote</div>
+          <div class="r-desc">Shipped production pages for Google IO via Left Field Labs. Headless Preact with Jinja and Python.</div>
+        </div>
+
+        <div class="r-job">
+          <div class="r-job-top">
+            <div class="r-company">Distributron</div>
+            <div class="r-dates">2020 &ndash; 2021</div>
+          </div>
+          <div class="r-role">Software Developer, Co-founder</div>
+          <div class="r-desc">Alcohol delivery ecommerce startup; reached YCombinator interview. Vue, geofencing, JAMstack.</div>
+        </div>
+
+        <div class="r-job">
+          <div class="r-job-top">
+            <div class="r-company">Treetz</div>
+            <div class="r-dates">2019 &ndash; 2020</div>
+          </div>
+          <div class="r-role">Co-founder &mdash; Indie Game Development</div>
+          <div class="r-desc">Unity mobile game with an 8-bit space theme. Co-led a team of 6 — developers and artists — from concept through production builds.</div>
+        </div>
+
+        <div class="r-job">
+          <div class="r-job-top">
+            <div class="r-company">Safety+</div>
+            <div class="r-dates">2019 &ndash; 2020</div>
+          </div>
+          <div class="r-role">Software Developer</div>
+          <div class="r-desc">React SPA built on Firebase for real-time factory safety incident tracking. Initial clients included Coca-Cola.</div>
+        </div>
+
+        <div class="r-job">
+          <div class="r-job-top">
+            <div class="r-company">1SEO Digital Agency <span class="r-company-sub">&mdash; Philadelphia</span></div>
+            <div class="r-dates">2018 &ndash; 2019</div>
+          </div>
+          <div class="r-role">Developer</div>
+          <div class="r-desc">Multi-client agency across WordPress, Drupal, Joomla, and Magento. React, Vue, ES6+.</div>
+        </div>
+
+        <div class="r-job">
+          <div class="r-job-top">
+            <div class="r-company">PSU Applied Research Laboratory</div>
+            <div class="r-dates">2010 &ndash; 2013</div>
+          </div>
+          <div class="r-role">Data Analyst &mdash; Underwater Acoustics</div>
+          <div class="r-desc">DARPA-funded research in the Underwater Acoustics Department. DoD security clearance. Data analytics and MATLAB for autonomous underwater vehicle systems.</div>
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <div class="print-footer">penn.goolz.org &nbsp;&bull;&nbsp; fundlush@proton.me &nbsp;&bull;&nbsp; github.com/melonmelonz</div>
+
+</div>
+</body>
+</html>

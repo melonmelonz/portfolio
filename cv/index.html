@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penn Cameron Porterfield — CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --aqua:        #34b8cb;
+      --aqua-light:  #7dd8e8;
+      --teal:        #2096a8;
+      --glass:       rgba(255,255,255,0.50);
+      --glass-hi:    rgba(255,255,255,0.70);
+      --glass-border: rgba(255,255,255,0.72);
+      --text-dark:   #162e3a;
+      --text-mid:    #3a5a6e;
+      --text-soft:   #6a8a9e;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      color: var(--text-dark);
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse 65% 55% at 12% 18%, rgba(90,200,225,0.42) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 65% at 88% 12%, rgba(190,228,252,0.60) 0%, transparent 62%),
+        radial-gradient(ellipse 75% 55% at 55% 90%, rgba(120,218,192,0.38) 0%, transparent 68%),
+        radial-gradient(ellipse 48% 58% at 4%  78%, rgba(165,208,242,0.48) 0%, transparent 62%),
+        radial-gradient(ellipse 60% 45% at 92% 68%, rgba(140,225,210,0.32) 0%, transparent 65%),
+        linear-gradient(158deg, #aed6ee 0%, #cce7f6 38%, #b8dfd5 72%, #d2f0e4 100%);
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    /* ── Card ───────────────────────────────── */
+    .card {
+      max-width: 820px;
+      margin: 0 auto;
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      box-shadow:
+        0 12px 48px rgba(40,150,175,0.16),
+        0  2px 10px rgba(40,170,200,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      overflow: hidden;
+    }
+
+    /* ── Header ─────────────────────────────── */
+    .header {
+      padding: 2.6rem 3rem 2.1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.55);
+      background: linear-gradient(180deg, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.08) 100%);
+      position: relative;
+    }
+
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--aqua-light) 40%, var(--aqua) 60%, transparent 100%);
+      opacity: 0.75;
+    }
+
+    .name {
+      font-size: 2.5rem;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      color: var(--text-dark);
+    }
+
+    .tagline {
+      margin-top: 0.4rem;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--teal);
+      letter-spacing: 0.01em;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.25rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.28rem 0.9rem;
+      background: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.82);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: background 0.15s, box-shadow 0.15s;
+      box-shadow: 0 1px 4px rgba(40,160,185,0.08);
+    }
+
+    .pill:hover {
+      background: rgba(255,255,255,0.88);
+      box-shadow: 0 3px 14px rgba(40,170,200,0.18);
+    }
+
+    .pill-tooltip {
+      position: relative;
+      cursor: help;
+    }
+
+    .pill-tooltip .tooltip-text {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(22,46,58,0.93);
+      color: #e8f4f8;
+      font-size: 0.72rem;
+      font-weight: 400;
+      line-height: 1.5;
+      padding: 0.45rem 0.8rem;
+      border-radius: 8px;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.22);
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .pill-tooltip .tooltip-text::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 5px solid transparent;
+      border-top-color: rgba(22,46,58,0.93);
+    }
+
+    .pill-tooltip:hover .tooltip-text {
+      display: block;
+    }
+
+    /* ── Body ───────────────────────────────── */
+    .body {
+      padding: 2.2rem 3rem 2.6rem;
+    }
+
+    .section {
+      margin-bottom: 2.4rem;
+    }
+
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--aqua);
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid rgba(52,184,203,0.18);
+    }
+
+    /* ── Summary ────────────────────────────── */
+    .summary {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text-mid);
+    }
+
+    /* ── Jobs ───────────────────────────────── */
+    .job {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      align-items: start;
+    }
+
+    .job:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+    .job-left {
+      border-left: 2px solid rgba(52,184,203,0.30);
+      padding-left: 1rem;
+    }
+
+    .job-company {
+      font-size: 0.94rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .job-sub {
+      font-weight: 300;
+      color: var(--text-soft);
+    }
+
+    .job-role {
+      margin-top: 0.12rem;
+      font-size: 0.83rem;
+      font-weight: 400;
+      color: var(--teal);
+    }
+
+    .job-desc {
+      margin-top: 0.5rem;
+      font-size: 0.83rem;
+      line-height: 1.72;
+      color: var(--text-mid);
+    }
+
+    .job-dates {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      white-space: nowrap;
+      text-align: right;
+      padding-top: 0.08rem;
+    }
+
+    /* ── Education / Certs ──────────────────── */
+    .edu-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.12rem 1.5rem;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      align-items: start;
+    }
+
+    .edu-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+
+    .edu-school {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .edu-field {
+      margin-top: 0.1rem;
+      font-size: 0.81rem;
+      color: var(--text-mid);
+    }
+
+    .edu-dates {
+      font-size: 0.76rem;
+      color: var(--text-soft);
+      white-space: nowrap;
+      text-align: right;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-left: 0.4rem;
+      padding: 0.12rem 0.5rem;
+      background: rgba(52,184,203,0.12);
+      border: 1px solid rgba(52,184,203,0.28);
+      border-radius: 999px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      vertical-align: middle;
+    }
+
+    /* ── Skills ─────────────────────────────── */
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      padding: 0.28rem 0.85rem;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.78);
+      border-radius: 999px;
+      font-size: 0.79rem;
+      font-weight: 400;
+      color: var(--text-mid);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 1px 3px rgba(40,160,185,0.07);
+    }
+
+    /* ── Footer ─────────────────────────────── */
+    .footer {
+      padding: 0.9rem 3rem;
+      border-top: 1px solid rgba(255,255,255,0.48);
+      background: rgba(255,255,255,0.18);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer span { font-size: 0.74rem; color: var(--text-soft); }
+
+    .footer a {
+      font-size: 0.74rem;
+      color: var(--text-soft);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer a:hover { color: var(--teal); }
+
+    /* ── Berry parallax layer ───────────────── */
+    .berries {
+      position: fixed;
+      inset: -80px;
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .berry {
+      position: absolute;
+      image-rendering: pixelated;
+      opacity: 0.5;
+      animation: berry-drift ease-in-out infinite;
+    }
+
+    @keyframes berry-drift {
+      0%   { transform: translateY(0px)   rotate(0deg); }
+      30%  { transform: translateY(-16px) rotate(7deg); }
+      70%  { transform: translateY(9px)   rotate(-4deg); }
+      100% { transform: translateY(0px)   rotate(0deg); }
+    }
+
+    .card {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Responsive ─────────────────────────── */
+    @media (max-width: 600px) {
+      body { padding: 1.25rem 0.75rem 2.5rem; }
+      .header, .body, .footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .name { font-size: 1.9rem; }
+      .job, .edu-item { grid-template-columns: 1fr; }
+      .job-dates, .edu-dates { text-align: left; padding-top: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="berries" id="berries">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/watmel-berry.png"  style="left:6%;top:8%;width:56px;animation-duration:9s;animation-delay:0s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/oran-berry.png"    style="left:83%;top:11%;width:40px;animation-duration:7s;animation-delay:-2s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/cheri-berry.png"  style="left:92%;top:44%;width:32px;animation-duration:11s;animation-delay:-4s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rawst-berry.png"  style="left:2%;top:58%;width:48px;animation-duration:8s;animation-delay:-1s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/leppa-berry.png"  style="left:74%;top:76%;width:36px;animation-duration:10s;animation-delay:-3s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/pecha-berry.png"  style="left:17%;top:87%;width:44px;animation-duration:12s;animation-delay:-5s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/sitrus-berry.png" style="left:46%;top:4%;width:38px;animation-duration:9.5s;animation-delay:-7s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/wiki-berry.png"   style="left:91%;top:66%;width:50px;animation-duration:13s;animation-delay:-2s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/watmel-berry.png" style="left:56%;top:90%;width:30px;animation-duration:7.5s;animation-delay:-9s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/oran-berry.png"   style="left:27%;top:18%;width:34px;animation-duration:11s;animation-delay:-6s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/cheri-berry.png"  style="left:4%;top:32%;width:28px;animation-duration:8.5s;animation-delay:-3.5s;">
+    <img class="berry" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rawst-berry.png"  style="left:68%;top:38%;width:42px;animation-duration:10.5s;animation-delay:-8s;">
+  </div>
+
+  <div class="card">
+
+    <header class="header">
+      <div class="name">Penn Cameron Porterfield</div>
+      <div class="tagline">Senior Cloud &amp; Software Engineer</div>
+      <nav class="contact">
+        <a class="pill" href="mailto:fundlush@proton.me">fundlush@proton.me</a>
+        <a class="pill" href="https://penn.goolz.org" target="_blank" rel="noopener">penn.goolz.org</a>
+        <a class="pill" href="https://github.com/melonmelonz" target="_blank">github/melonmelonz</a>
+        <span class="pill">Eastern Time</span>
+        <a class="pill" href="resume.html">Resume PDF</a>
+        <span class="pill pill-tooltip">No LinkedIn<span class="tooltip-text">Abandoned for OpSec &amp; privacy reasons — reach out directly instead.</span></span>
+      </nav>
+    </header>
+
+    <main class="body">
+
+      <section class="section">
+        <div class="section-title">Summary</div>
+        <p class="summary">Senior cloud engineer and full-stack developer with 8+ years of experience across independent consulting, agency work, and venture-backed startups. Focused on cloud architecture, DevOps, and end-to-end delivery of production systems on AWS, Azure, and GCP. Background includes DARPA-funded DoD research, ecommerce, and production work for Google. Currently completing a B.S. in Network and Cloud Engineering at WGU.</p>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Experience</div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="job-company">Samwise Development</div>
+            <div class="job-role">Founder &mdash; Cloud &amp; Software Consultancy</div>
+            <div class="job-desc">Cloud and software development consultancy serving clients across industries. Full-stack development, cloud infrastructure, and end-to-end project delivery at any scale.</div>
+          </div>
+          <div class="job-dates">2022 &ndash; Present</div>
+        </div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="job-company">Google IO <span class="job-sub">&mdash; Contract</span></div>
+            <div class="job-role">Full Stack Developer &mdash; Remote</div>
+            <div class="job-desc">Shipped production pages for Google IO via Left Field Labs. Headless Preact with Jinja and Python.</div>
+          </div>
+          <div class="job-dates">2021 &ndash; 2022</div>
+        </div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="job-company">Distributron</div>
+            <div class="job-role">Software Developer, Co-founder</div>
+            <div class="job-desc">Alcohol delivery ecommerce startup; reached YCombinator interview. Built with Vue, CSS, HTML, geofencing, and JAMstack architecture.</div>
+          </div>
+          <div class="job-dates">2020 &ndash; 2021</div>
+        </div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="job-company">Treetz</div>
+            <div class="job-role">Co-founder &mdash; Indie Game Development</div>
+            <div class="job-desc">Unity mobile game with an 8-bit space theme. Co-led a team of 6 — developers and artists — from concept through production builds.</div>
+          </div>
+          <div class="job-dates">2019 &ndash; 2020</div>
+        </div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="job-company">Safety+</div>
+            <div class="job-role">Software Developer</div>
+            <div class="job-desc">React SPA built on Firebase for real-time factory safety incident tracking. Initial clients included Coca-Cola.</div>
+          </div>
+          <div class="job-dates">2019 &ndash; 2020</div>
+        </div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="job-company">1SEO Digital Agency <span class="job-sub">&mdash; Philadelphia</span></div>
+            <div class="job-role">Developer</div>
+            <div class="job-desc">Multi-client agency across WordPress, Drupal, Joomla, and Magento. React, Vue, ES6+.</div>
+          </div>
+          <div class="job-dates">2018 &ndash; 2019</div>
+        </div>
+
+        <div class="job">
+          <div class="job-left">
+            <div class="job-company">PSU Applied Research Laboratory</div>
+            <div class="job-role">Data Analyst</div>
+            <div class="job-desc">DARPA-funded research in the Underwater Acoustics Department. DoD security clearance. Data analytics and MATLAB for autonomous underwater vehicle systems.</div>
+          </div>
+          <div class="job-dates">2010 &ndash; 2013</div>
+        </div>
+
+      </section>
+
+      <section class="section">
+        <div class="section-title">Education</div>
+
+        <div class="edu-item">
+          <div>
+            <div class="edu-school">Western Governors University</div>
+            <div class="edu-field">B.S. Network and Cloud Engineering <span class="badge">In Progress</span></div>
+          </div>
+          <div class="edu-dates">Present</div>
+        </div>
+
+        <div class="edu-item">
+          <div>
+            <div class="edu-school">Penn State University</div>
+            <div class="edu-field">Computer Engineering &mdash; 3 years, no degree</div>
+          </div>
+          <div class="edu-dates">2009 &ndash; 2013</div>
+        </div>
+
+      </section>
+
+      <section class="section">
+        <div class="section-title">Certifications</div>
+        <div class="edu-item">
+          <div>
+            <div class="edu-school">CompTIA Security+</div>
+            <div class="edu-field">Security operations, threats &amp; risk management</div>
+          </div>
+          <div class="edu-dates">&mdash;</div>
+        </div>
+        <div class="edu-item">
+          <div>
+            <div class="edu-school">CompTIA Network+</div>
+            <div class="edu-field">Network infrastructure &amp; operations</div>
+          </div>
+          <div class="edu-dates">&mdash;</div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Skills</div>
+        <div class="tag-cloud">
+          <span class="tag">JavaScript</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">React</span>
+          <span class="tag">Vue</span>
+          <span class="tag">PHP</span>
+          <span class="tag">Laravel</span>
+          <span class="tag">Python</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Bash</span>
+          <span class="tag">Cloud Infrastructure</span>
+          <span class="tag">AWS</span>
+          <span class="tag">Azure</span>
+          <span class="tag">GCP</span>
+          <span class="tag">Cloudflare</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Kubernetes</span>
+          <span class="tag">CI/CD</span>
+          <span class="tag">DNS / Networking</span>
+          <span class="tag">S3 / Object Storage</span>
+          <span class="tag">Unity</span>
+          <span class="tag">MATLAB</span>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title">Interests</div>
+        <div class="tag-cloud">
+          <span class="tag">Music</span>
+          <span class="tag">Travel</span>
+          <span class="tag">Cooking</span>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <span>penn cameron porterfield &mdash; 2026</span>
+      <a href="resume.html">printable resume &darr;</a>
+    </footer>
+
+  </div>
+  <script>
+    const layer = document.getElementById('berries');
+    document.addEventListener('mousemove', e => {
+      const x = (e.clientX / window.innerWidth  - 0.5) * 14;
+      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      layer.style.transform = `translate(${x}px, ${y}px)`;
+    });
+  </script>
+</body>
+</html>
