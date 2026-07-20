@@ -429,7 +429,7 @@ document.querySelectorAll('.window').forEach(w => {
 });
 
 /* ── Actions (icons, start menu, buttons) ───── */
-function goModern(){ try { localStorage.setItem('penn-view','modern'); } catch(e){} location.href = '/'; }
+function goModern(){ location.href = '/'; }
 function wire(el){
   if (el.dataset.open !== undefined) el.addEventListener('click', () => openWin(el.dataset.open));
   if (el.dataset.href !== undefined) el.addEventListener('click', () => { location.href = el.dataset.href; });
