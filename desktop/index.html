@@ -108,7 +108,7 @@
     border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
     border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
   #ms-head .lcd { background: #000; color: #f00; font-family: monospace; font-weight: bold; padding: 2px 5px; font-size: 16px; }
-  #ms-face { width: 28px; height: 28px; text-align: center; }
+  #ms-face { width: 26px; height: 26px; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 15px; line-height: 1; }
   #ms-grid { display: grid; gap: 0; }
   .cell { width: 20px; height: 20px; text-align: center; line-height: 20px; font-weight: bold; font-size: 13px; cursor: default;
     background: var(--gray); border-top: 2px solid var(--white); border-left: 2px solid var(--white);
@@ -134,6 +134,11 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .taskitem.active { border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
     border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); font-weight: bold; }
+  #exit95 { flex-shrink: 0; padding: 3px 10px; font-weight: bold; cursor: default; white-space: nowrap;
+    border-top: 2px solid var(--white); border-left: 2px solid var(--white);
+    border-right: 2px solid var(--gray-darker); border-bottom: 2px solid var(--gray-darker); }
+  #exit95:active { border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+    border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
   #clock { flex-shrink: 0; padding: 3px 10px; min-width: 74px; text-align: center;
     border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
     border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
@@ -334,6 +339,7 @@ or Start > Return to Modern Site.
 <div id="taskbar">
   <div id="startbtn"><span class="flag">🪟</span> Start</div>
   <div id="tasks"></div>
+  <div id="exit95" data-modern title="Leave Windows 95 mode — back to the normal site">✕&nbsp;Exit&nbsp;'95</div>
   <div id="clock">12:00 PM</div>
 </div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>try{if(localStorage.getItem('penn-view')==='desktop')location.replace('/desktop');}catch(e){}</script>
+  <script>try{var n=performance.getEntriesByType('navigation')[0];var bf=n&&n.type==='back_forward';if(!bf&&localStorage.getItem('penn-view')==='desktop')location.replace('/desktop');}catch(e){}</script>
   <title>Penn Cameron Porterfield</title>
   <meta name="description" content="Senior software & cloud engineer. FOSS advocate. Architecting and shipping production systems end to end.">
   <link rel="stylesheet" href="style.css">
