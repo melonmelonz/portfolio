@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>try{if(localStorage.getItem('penn-view')==='desktop')location.replace('/desktop');}catch(e){}</script>
   <title>Penn Cameron Porterfield</title>
   <meta name="description" content="Senior software & cloud engineer. FOSS advocate. Architecting and shipping production systems end to end.">
   <link rel="stylesheet" href="style.css">
@@ -29,6 +30,7 @@
       <li><a href="#contact">contact</a></li>
       <li><a href="/cv">resume</a></li>
       <li><a href="/booking">book</a></li>
+      <li><a href="/desktop" class="nav-95" onclick="try{localStorage.setItem('penn-view','desktop')}catch(e){}">win95</a></li>
     </ul>
   </nav>
 
@@ -289,6 +291,33 @@ Subject: greetings</div>
 
 </div>
 
+  <!-- Win95 mode switch -->
+  <a id="win95-switch" href="/desktop" onclick="try{localStorage.setItem('penn-view','desktop')}catch(e){}" title="Boot the Windows 95 edition of this site" aria-label="Switch to Windows 95 desktop mode">
+    <span class="w95-screen">🖥️</span>
+    <span class="w95-label">boot&nbsp;'95</span>
+    <span class="w95-toggle"><span class="w95-knob"></span></span>
+  </a>
+  <style>
+    #win95-switch{
+      position:fixed; right:16px; bottom:16px; z-index:900;
+      display:flex; align-items:center; gap:8px;
+      padding:7px 10px; text-decoration:none;
+      font-family:'Tahoma','MS Sans Serif',Arial,sans-serif; font-size:12px; color:#000;
+      background:#c0c0c0;
+      border-top:2px solid #fff; border-left:2px solid #fff;
+      border-right:2px solid #404040; border-bottom:2px solid #404040;
+      box-shadow:2px 2px 0 rgba(0,0,0,.4);
+    }
+    #win95-switch:active{ border-top:2px solid #404040; border-left:2px solid #404040; border-right:2px solid #fff; border-bottom:2px solid #fff; }
+    #win95-switch .w95-label{ font-weight:bold; letter-spacing:.3px; }
+    #win95-switch .w95-toggle{ width:34px; height:16px; background:#808080; position:relative;
+      border-top:2px solid #404040; border-left:2px solid #404040; border-right:2px solid #fff; border-bottom:2px solid #fff; }
+    #win95-switch .w95-knob{ position:absolute; top:0; left:0; width:14px; height:12px; background:#c0c0c0;
+      border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #404040; border-bottom:1px solid #404040;
+      transition:left .15s steps(3); }
+    #win95-switch:hover .w95-knob{ left:18px; }
+    @media (max-width:640px){ #win95-switch .w95-label{ display:none; } }
+  </style>
   <script src="script.js"></script>
 </body>
 </html>

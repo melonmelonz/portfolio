@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Penn Cameron Porterfield — Desktop</title>
+<meta name="description" content="Penn Cameron Porterfield's portfolio, as a Windows 95 desktop.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --gray: #c0c0c0; --gray-dark: #808080; --gray-darker: #404040;
+    --white: #fff; --black: #000; --navy: #000080; --navy-light: #1084d0;
+    --teal: #008080; --font: 'Tahoma', 'MS Sans Serif', Arial, sans-serif;
+  }
+  html, body { height: 100dvh; }
+  body {
+    font-family: var(--font); font-size: 12px; color: var(--black);
+    background: var(--teal); overflow: hidden; user-select: none;
+    -webkit-font-smoothing: none;
+  }
+  button { font-family: var(--font); font-size: 12px; }
+
+  /* ── Bevels ─────────────────────────────── */
+  .out { border-top: 2px solid var(--white); border-left: 2px solid var(--white);
+         border-right: 2px solid var(--gray-darker); border-bottom: 2px solid var(--gray-darker); }
+  .in  { border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+         border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
+
+  /* ── Boot ───────────────────────────────── */
+  #boot { position: fixed; inset: 0; background: #000; z-index: 9999;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: opacity .5s ease; }
+  #boot.hidden { opacity: 0; pointer-events: none; }
+  #boot .logo { color: #fff; font-size: 34px; font-weight: bold; letter-spacing: 3px; margin-bottom: 6px; }
+  #boot .logo span { color: var(--navy-light); }
+  #boot .sub { color: #888; font-size: 11px; margin-bottom: 40px; letter-spacing: 1px; }
+  #boot .barwrap { width: 300px; height: 20px; background: #000; padding: 2px; }
+  #boot .bar { height: 100%; width: 0;
+    background: repeating-linear-gradient(90deg,var(--navy) 0 14px, transparent 14px 16px);
+    transition: width .2s linear; }
+
+  /* ── Desktop ────────────────────────────── */
+  #desktop { position: absolute; inset: 0 0 30px 0; padding: 8px; }
+  .icon { width: 78px; display: inline-flex; flex-direction: column; align-items: center;
+    gap: 3px; padding: 4px; margin: 2px; cursor: default; vertical-align: top; }
+  .icon .glyph { font-size: 30px; filter: drop-shadow(1px 1px 0 rgba(0,0,0,.35)); }
+  .icon .label { color: #fff; font-size: 11px; text-align: center; padding: 1px 3px; line-height: 1.2; }
+  .icon.selected .label { background: var(--navy); }
+  .icon.selected .glyph { filter: none; }
+
+  /* ── Windows ────────────────────────────── */
+  .window { position: absolute; background: var(--gray); min-width: 200px;
+    display: none; flex-direction: column; box-shadow: 1px 1px 0 #000;
+    border-top: 2px solid var(--white); border-left: 2px solid var(--white);
+    border-right: 2px solid var(--gray-darker); border-bottom: 2px solid var(--gray-darker); }
+  .window.open { display: flex; }
+  .title-bar { display: flex; align-items: center; gap: 4px; padding: 3px 3px 3px 5px;
+    background: var(--gray-dark); cursor: move; flex-shrink: 0; }
+  .window.active .title-bar { background: linear-gradient(to right, var(--navy), var(--navy-light)); }
+  .title-bar .ti { font-size: 14px; }
+  .title-bar .tt { color: var(--white); font-weight: bold; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .tc { width: 18px; height: 16px; background: var(--gray); display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: bold; line-height: 1; cursor: default;
+    border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+    border-right: 1px solid var(--gray-darker); border-bottom: 1px solid var(--gray-darker); }
+  .tc:active { border-top: 1px solid var(--gray-darker); border-left: 1px solid var(--gray-darker);
+    border-right: 1px solid var(--white); border-bottom: 1px solid var(--white); }
+  .win-body { padding: 12px; overflow: auto; background: var(--gray);
+    border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+    border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); margin: 3px; }
+  .win-body.paper { background: var(--white); border-color: var(--gray-dark) var(--white) var(--white) var(--gray-dark);
+    border-width: 2px; border-style: solid; }
+
+  /* content helpers */
+  h2.wh { font-size: 14px; margin-bottom: 8px; }
+  .win-body p { line-height: 1.5; margin-bottom: 8px; max-width: 46ch; }
+  .win-body a { color: var(--navy); }
+  .kv { display: grid; grid-template-columns: max-content 1fr; gap: 3px 12px; }
+  ul.list { list-style: none; }
+  ul.list li { padding: 3px 0; border-bottom: 1px dotted var(--gray-dark); }
+  ul.list li:last-child { border-bottom: none; }
+  .tag { display: inline-block; background: var(--gray); margin: 2px; padding: 2px 8px;
+    border-top: 1px solid var(--white); border-left: 1px solid var(--white);
+    border-right: 1px solid var(--gray-darker); border-bottom: 1px solid var(--gray-darker); }
+  .btn { background: var(--gray); padding: 4px 14px; cursor: default; font-weight: bold;
+    border-top: 2px solid var(--white); border-left: 2px solid var(--white);
+    border-right: 2px solid var(--gray-darker); border-bottom: 2px solid var(--gray-darker); }
+  .btn:active { border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+    border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
+  .prj { margin-bottom: 10px; }
+  .prj b { color: var(--navy); }
+  .prj .tagchip { font-size: 10px; color: var(--gray-darker); }
+  .photo { float: right; width: 120px; margin: 0 0 8px 10px; border: 2px solid var(--gray-dark); }
+
+  /* ── Calculator ─────────────────────────── */
+  #calc .win-body { padding: 6px; }
+  #calc .disp { background: var(--white); text-align: right; padding: 4px 6px; font-size: 16px; margin-bottom: 6px;
+    border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+    border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
+  #calc .keys { display: grid; grid-template-columns: repeat(4, 40px); gap: 4px; }
+  #calc .keys .btn { padding: 8px 0; text-align: center; }
+  #calc .keys .op { color: var(--navy); }
+
+  /* ── Minesweeper ────────────────────────── */
+  #mines .win-body { padding: 8px; }
+  #ms-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding: 4px;
+    border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+    border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
+  #ms-head .lcd { background: #000; color: #f00; font-family: monospace; font-weight: bold; padding: 2px 5px; font-size: 16px; }
+  #ms-face { width: 28px; height: 28px; text-align: center; }
+  #ms-grid { display: grid; gap: 0; }
+  .cell { width: 20px; height: 20px; text-align: center; line-height: 20px; font-weight: bold; font-size: 13px; cursor: default;
+    background: var(--gray); border-top: 2px solid var(--white); border-left: 2px solid var(--white);
+    border-right: 2px solid var(--gray-darker); border-bottom: 2px solid var(--gray-darker); }
+  .cell.rev { border: 1px solid var(--gray-dark); background: var(--gray); }
+  .cell.mine { background: #f00; }
+  .c1{color:#00f}.c2{color:#008000}.c3{color:#f00}.c4{color:#000080}.c5{color:#800000}.c6{color:#008080}.c7{color:#000}.c8{color:#808080}
+
+  /* ── Taskbar ────────────────────────────── */
+  #taskbar { position: absolute; left: 0; right: 0; bottom: 0; height: 30px; background: var(--gray);
+    display: flex; align-items: center; gap: 4px; padding: 3px;
+    border-top: 2px solid var(--white); }
+  #startbtn { display: flex; align-items: center; gap: 5px; font-weight: bold; padding: 2px 8px; cursor: default; flex-shrink: 0;
+    border-top: 2px solid var(--white); border-left: 2px solid var(--white);
+    border-right: 2px solid var(--gray-darker); border-bottom: 2px solid var(--gray-darker); }
+  #startbtn.on { border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+    border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
+  #startbtn .flag { font-size: 14px; }
+  #tasks { display: flex; gap: 4px; flex: 1; overflow: hidden; }
+  .taskitem { display: flex; align-items: center; gap: 5px; min-width: 120px; max-width: 160px; padding: 2px 6px; cursor: default;
+    border-top: 2px solid var(--white); border-left: 2px solid var(--white);
+    border-right: 2px solid var(--gray-darker); border-bottom: 2px solid var(--gray-darker);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .taskitem.active { border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+    border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); font-weight: bold; }
+  #clock { flex-shrink: 0; padding: 3px 10px; min-width: 74px; text-align: center;
+    border-top: 2px solid var(--gray-darker); border-left: 2px solid var(--gray-darker);
+    border-right: 2px solid var(--white); border-bottom: 2px solid var(--white); }
+
+  /* ── Start menu ─────────────────────────── */
+  #startmenu { position: absolute; bottom: 30px; left: 3px; width: 200px; background: var(--gray); display: none;
+    border-top: 2px solid var(--white); border-left: 2px solid var(--white);
+    border-right: 2px solid var(--gray-darker); border-bottom: 2px solid var(--gray-darker); z-index: 5000; }
+  #startmenu.open { display: flex; }
+  #startmenu .sidebar { width: 26px; background: linear-gradient(var(--navy), var(--navy-light));
+    writing-mode: vertical-rl; transform: rotate(180deg); color: #fff; font-weight: bold; font-size: 15px;
+    text-align: center; padding: 8px 0; letter-spacing: 2px; }
+  #startmenu .items { flex: 1; padding: 2px; }
+  .smi { display: flex; align-items: center; gap: 8px; padding: 5px 8px; cursor: default; }
+  .smi:hover { background: var(--navy); color: #fff; }
+  .smi .g { font-size: 16px; width: 18px; text-align: center; }
+  .smi.sep { border-top: 1px solid var(--gray-dark); border-bottom: 1px solid var(--white); padding: 0; margin: 3px 2px; }
+
+  @media (max-width: 640px) {
+    .window { max-width: 94vw; }
+    #calc .keys { grid-template-columns: repeat(4, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Boot -->
+<div id="boot">
+  <div class="logo">PENN<span>.OS</span></div>
+  <div class="sub">penn.goolz.org &mdash; a portfolio, circa 1995</div>
+  <div class="barwrap out"><div class="bar" id="bootbar"></div></div>
+</div>
+
+<!-- Desktop -->
+<div id="desktop">
+  <div class="icon" data-open="about"><div class="glyph">🧑‍💻</div><div class="label">About<br>penn.exe</div></div>
+  <div class="icon" data-open="projects"><div class="glyph">📁</div><div class="label">Projects</div></div>
+  <div class="icon" data-open="stack"><div class="glyph">🗄️</div><div class="label">Stack</div></div>
+  <div class="icon" data-open="certs"><div class="glyph">📜</div><div class="label">Certifications</div></div>
+  <div class="icon" data-href="/cv"><div class="glyph">📄</div><div class="label">Résumé</div></div>
+  <div class="icon" data-href="/booking"><div class="glyph">📅</div><div class="label">Book Time</div></div>
+  <div class="icon" data-open="contact"><div class="glyph">✉️</div><div class="label">Contact</div></div>
+  <div class="icon" data-open="mines"><div class="glyph">💣</div><div class="label">Minesweeper</div></div>
+  <div class="icon" data-open="calc"><div class="glyph">🧮</div><div class="label">Calculator</div></div>
+  <div class="icon" data-open="notepad"><div class="glyph">📝</div><div class="label">Read Me</div></div>
+  <div class="icon" data-open="mycomp"><div class="glyph">🖥️</div><div class="label">My Computer</div></div>
+  <div class="icon" data-modern><div class="glyph">🌐</div><div class="label">Modern Site</div></div>
+  <div class="icon" data-open="recycle"><div class="glyph">🗑️</div><div class="label">Recycle Bin</div></div>
+</div>
+
+<!-- ── Windows ── -->
+<div class="window" id="about" style="width:440px;top:40px;left:60px">
+  <div class="title-bar"><span class="ti">🧑‍💻</span><span class="tt">About — penn.exe</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body">
+    <img src="/me_and_noogs_optimized.jpg" alt="Penn" class="photo out">
+    <h2 class="wh">Penn Cameron Porterfield</h2>
+    <p><b>Senior Software &amp; Cloud Engineer</b></p>
+    <p>Senior engineer with 8+ years shipping production software end to end — from
+    application code to the cloud infrastructure on AWS, Azure, and GCP underneath it.
+    I design for clean architecture, operational resilience, and systems that outlast
+    the sprint that built them.</p>
+    <p>Deep in cloud, DevOps, and systems programming. FOSS contributor, Linux daily
+    driver (I use Gentoo, btw), and a firm believer that the terminal is the best IDE.</p>
+    <div><span class="btn" data-open="projects">Projects</span> &nbsp;
+      <span class="btn" data-href="/cv">Résumé</span> &nbsp;
+      <span class="btn" data-href="/booking">Book time</span></div>
+  </div>
+</div>
+
+<div class="window" id="projects" style="width:460px;top:70px;left:120px">
+  <div class="title-bar"><span class="ti">📁</span><span class="tt">Projects</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body paper">
+    <div class="prj"><b>samwise development</b> <span class="tagchip">[consulting]</span><br>
+      Cloud &amp; software consultancy — full-stack, infra, and everything between.
+      <a href="https://samwise.pages.dev" target="_blank" rel="noopener">samwise.pages.dev</a></div>
+    <div class="prj"><b>google io</b> <span class="tagchip">[preact/python]</span><br>
+      Production pages for Google's developer conference via Left Field Labs. Headless Preact + Jinja/Python.</div>
+    <div class="prj"><b>distributron</b> <span class="tagchip">[vue/jamstack]</span><br>
+      Alcohol-delivery ecommerce startup. Geofencing, JAMstack, YCombinator interview.</div>
+    <div class="prj"><b>treetz</b> <span class="tagchip">[ue5/c++]</span><br>
+      Indie mobile game, 8-bit space theme. Co-led a team of 6 from concept to launch.
+      <a href="https://treetz.pages.dev" target="_blank" rel="noopener">treetz.pages.dev</a></div>
+    <div class="prj"><b>monero-multisig</b> <span class="tagchip">[rust]</span><br>
+      M-of-N multisig wallet CLI. Key exchange, co-signing, submission.
+      <a href="https://github.com/melonmelonz/monero-multisig" target="_blank" rel="noopener">github</a></div>
+  </div>
+</div>
+
+<div class="window" id="stack" style="width:380px;top:110px;left:200px">
+  <div class="title-bar"><span class="ti">🗄️</span><span class="tt">Stack — System Properties</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body">
+    <h2 class="wh">Tools of the trade</h2>
+    <div id="stacktags"></div>
+  </div>
+</div>
+
+<div class="window" id="certs" style="width:360px;top:140px;left:260px">
+  <div class="title-bar"><span class="ti">📜</span><span class="tt">Certifications</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body paper">
+    <ul class="list">
+      <li><b>CompTIA Security+</b><br><span style="color:var(--gray-darker)">Security operations, threats &amp; risk management</span></li>
+      <li><b>CompTIA Network+</b><br><span style="color:var(--gray-darker)">Network infrastructure, protocols &amp; operations</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="window" id="contact" style="width:360px;top:120px;left:320px">
+  <div class="title-bar"><span class="ti">✉️</span><span class="tt">Contact</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body">
+    <p>Want to work together, or just say hey?</p>
+    <ul class="list">
+      <li>📅 <a href="/booking">Book a time</a> — pick a slot, opens your mail client</li>
+      <li>🐙 <a href="https://github.com/melonmelonz" target="_blank" rel="noopener">github.com/melonmelonz</a></li>
+      <li>🌐 <a href="https://samwise.pages.dev" target="_blank" rel="noopener">samwise.pages.dev</a></li>
+      <li title="OpSec — intentionally not on LinkedIn" style="opacity:.7">🚫 no LinkedIn (opsec)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="window" id="calc" style="width:186px;top:80px;left:380px">
+  <div class="title-bar"><span class="ti">🧮</span><span class="tt">Calculator</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body">
+    <div class="disp" id="calc-disp">0</div>
+    <div class="keys" id="calc-keys"></div>
+  </div>
+</div>
+
+<div class="window" id="mines" style="top:90px;left:420px">
+  <div class="title-bar"><span class="ti">💣</span><span class="tt">Minesweeper</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body">
+    <div id="ms-head">
+      <span class="lcd" id="ms-mines">010</span>
+      <span class="btn" id="ms-face">🙂</span>
+      <span class="lcd" id="ms-timer">000</span>
+    </div>
+    <div id="ms-grid"></div>
+  </div>
+</div>
+
+<div class="window" id="notepad" style="width:420px;top:60px;left:150px">
+  <div class="title-bar"><span class="ti">📝</span><span class="tt">read-me.txt — Notepad</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body paper" style="font-family:monospace;white-space:pre-wrap;line-height:1.5">Welcome to PENN.OS.
+
+This is my portfolio wearing a Windows 95 costume. Everything the
+modern site has lives here as a program:
+
+  About penn.exe .... who I am
+  Projects .......... selected work
+  Stack ............. what I build with
+  Certifications .... Security+, Network+
+  Résumé ............ opens the real CV
+  Book Time ......... schedule a call
+  Minesweeper ....... you know this one
+
+Prefer a normal website? Double-click "Modern Site" on the desktop,
+or Start > Return to Modern Site.
+
+  -- Penn</div>
+</div>
+
+<div class="window" id="mycomp" style="width:400px;top:100px;left:90px">
+  <div class="title-bar"><span class="ti">🖥️</span><span class="tt">My Computer</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body paper">
+    <div class="kv">
+      <span>💾 (C:)</span><span>PENN.OS boot volume</span>
+      <span>📁 Projects</span><span>5 items</span>
+      <span>📁 Résumé</span><span>opens penn.goolz.org/cv</span>
+      <span>🖨️ Printers</span><span>(empty)</span>
+      <span>⚙️ Control Panel</span><span>(you have enough control)</span>
+    </div>
+  </div>
+</div>
+
+<div class="window" id="recycle" style="width:320px;top:150px;left:200px">
+  <div class="title-bar"><span class="ti">🗑️</span><span class="tt">Recycle Bin</span>
+    <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
+  <div class="win-body paper">
+    <p>The Recycle Bin contains:</p>
+    <ul class="list">
+      <li>🗒️ CompTIA A+ (entry-level)</li>
+      <li>🗒️ "HTML / CSS / Tailwind" as headline skills</li>
+      <li>🗒️ the word "junior"</li>
+    </ul>
+    <p style="opacity:.7">Emptied on the way to senior.</p>
+  </div>
+</div>
+
+<!-- Taskbar -->
+<div id="taskbar">
+  <div id="startbtn"><span class="flag">🪟</span> Start</div>
+  <div id="tasks"></div>
+  <div id="clock">12:00 PM</div>
+</div>
+
+<!-- Start menu -->
+<div id="startmenu">
+  <div class="sidebar">PENN.OS</div>
+  <div class="items">
+    <div class="smi" data-open="about"><span class="g">🧑‍💻</span> About penn.exe</div>
+    <div class="smi" data-open="projects"><span class="g">📁</span> Projects</div>
+    <div class="smi" data-open="stack"><span class="g">🗄️</span> Stack</div>
+    <div class="smi" data-open="certs"><span class="g">📜</span> Certifications</div>
+    <div class="smi" data-href="/cv"><span class="g">📄</span> Résumé</div>
+    <div class="smi" data-href="/booking"><span class="g">📅</span> Book Time</div>
+    <div class="smi sep"></div>
+    <div class="smi" data-open="mines"><span class="g">💣</span> Minesweeper</div>
+    <div class="smi" data-open="calc"><span class="g">🧮</span> Calculator</div>
+    <div class="smi" data-open="notepad"><span class="g">📝</span> Read Me</div>
+    <div class="smi sep"></div>
+    <div class="smi" data-modern><span class="g">🌐</span> Return to Modern Site</div>
+  </div>
+</div>
+
+<script>
+/* ── Window manager ─────────────────────────── */
+let z = 100;
+const openWins = new Set();
+const tasksEl = document.getElementById('tasks');
+
+function taskFor(id){ return document.querySelector('.taskitem[data-for="'+id+'"]'); }
+
+function focusWin(id){
+  document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
+  document.querySelectorAll('.taskitem').forEach(t => t.classList.remove('active'));
+  const w = document.getElementById(id);
+  w.classList.add('active'); w.style.zIndex = ++z;
+  const t = taskFor(id); if (t) t.classList.add('active');
+}
+
+function openWin(id){
+  const w = document.getElementById(id);
+  if (!w) return;
+  w.classList.add('open');
+  if (!openWins.has(id)){
+    openWins.add(id);
+    const t = document.createElement('div');
+    t.className = 'taskitem'; t.dataset.for = id;
+    t.innerHTML = '<span>'+w.querySelector('.ti').textContent+'</span> '+w.querySelector('.tt').textContent;
+    t.addEventListener('click', () => {
+      if (w.classList.contains('open') && w.classList.contains('active')) minWin(id);
+      else { w.classList.add('open'); focusWin(id); }
+    });
+    tasksEl.appendChild(t);
+  }
+  focusWin(id);
+  if (id === 'mines' && !mines.built) mines.init();
+}
+function closeWin(id){
+  const w = document.getElementById(id);
+  w.classList.remove('open','active');
+  openWins.delete(id);
+  const t = taskFor(id); if (t) t.remove();
+}
+function minWin(id){
+  document.getElementById(id).classList.remove('open','active');
+  const t = taskFor(id); if (t) t.classList.remove('active');
+}
+
+/* dragging */
+document.querySelectorAll('.window').forEach(w => {
+  const bar = w.querySelector('.title-bar');
+  bar.addEventListener('pointerdown', e => {
+    if (e.target.classList.contains('tc')) return;
+    focusWin(w.id);
+    const r = w.getBoundingClientRect();
+    const ox = e.clientX - r.left, oy = e.clientY - r.top;
+    bar.setPointerCapture(e.pointerId);
+    const move = ev => {
+      w.style.left = Math.max(0, Math.min(window.innerWidth - 40, ev.clientX - ox)) + 'px';
+      w.style.top  = Math.max(0, Math.min(window.innerHeight - 60, ev.clientY - oy)) + 'px';
+    };
+    const up = () => { bar.removeEventListener('pointermove', move); bar.removeEventListener('pointerup', up); };
+    bar.addEventListener('pointermove', move); bar.addEventListener('pointerup', up);
+  });
+  w.addEventListener('pointerdown', () => focusWin(w.id));
+  w.querySelector('[data-close]').addEventListener('click', e => { e.stopPropagation(); closeWin(w.id); });
+  const m = w.querySelector('[data-min]'); if (m) m.addEventListener('click', e => { e.stopPropagation(); minWin(w.id); });
+});
+
+/* ── Actions (icons, start menu, buttons) ───── */
+function goModern(){ try { localStorage.setItem('penn-view','modern'); } catch(e){} location.href = '/'; }
+function wire(el){
+  if (el.dataset.open !== undefined) el.addEventListener('click', () => openWin(el.dataset.open));
+  if (el.dataset.href !== undefined) el.addEventListener('click', () => { location.href = el.dataset.href; });
+  if (el.dataset.modern !== undefined) el.addEventListener('click', goModern);
+}
+document.querySelectorAll('[data-open],[data-href],[data-modern]').forEach(wire);
+
+/* desktop icon single-select + open on dblclick (click on mobile) */
+let lastTap = 0;
+document.querySelectorAll('#desktop .icon').forEach(ic => {
+  ic.addEventListener('click', () => {
+    document.querySelectorAll('#desktop .icon').forEach(i => i.classList.remove('selected'));
+    ic.classList.add('selected');
+  });
+});
+
+/* ── Start menu ─────────────────────────────── */
+const startbtn = document.getElementById('startbtn');
+const startmenu = document.getElementById('startmenu');
+function toggleStart(force){
+  const open = force !== undefined ? force : !startmenu.classList.contains('open');
+  startmenu.classList.toggle('open', open);
+  startbtn.classList.toggle('on', open);
+}
+startbtn.addEventListener('click', e => { e.stopPropagation(); toggleStart(); });
+document.addEventListener('click', () => toggleStart(false));
+startmenu.addEventListener('click', e => e.stopPropagation());
+document.querySelectorAll('#startmenu .smi').forEach(smi => smi.addEventListener('click', () => toggleStart(false)));
+
+/* ── Clock ──────────────────────────────────── */
+function tick(){
+  const d = new Date();
+  let h = d.getHours(), m = d.getMinutes();
+  const ap = h >= 12 ? 'PM' : 'AM'; h = h % 12 || 12;
+  document.getElementById('clock').textContent = h + ':' + String(m).padStart(2,'0') + ' ' + ap;
+}
+setInterval(tick, 1000); tick();
+
+/* ── Stack tags ─────────────────────────────── */
+['TypeScript','React','Node.js','Python','Rust','PHP / Laravel','Linux','AWS','Azure','GCP',
+ 'Docker','Kubernetes','CI/CD','Cloud Architecture','Distributed Systems'].forEach(t => {
+  const s = document.createElement('span'); s.className = 'tag'; s.textContent = t;
+  document.getElementById('stacktags').appendChild(s);
+});
+
+/* ── Calculator ─────────────────────────────── */
+(function(){
+  const disp = document.getElementById('calc-disp');
+  const keys = document.getElementById('calc-keys');
+  let cur = '0', prev = null, op = null, fresh = true;
+  const show = () => disp.textContent = cur.length > 12 ? Number(cur).toPrecision(8) : cur;
+  const layout = ['C','±','%','÷','7','8','9','×','4','5','6','-','1','2','3','+','0','.','=',''];
+  const compute = () => {
+    const a = parseFloat(prev), b = parseFloat(cur);
+    let r = b;
+    if (op === '+') r = a + b; else if (op === '-') r = a - b;
+    else if (op === '×') r = a * b; else if (op === '÷') r = b === 0 ? NaN : a / b;
+    return isNaN(r) ? 'Error' : String(+r.toFixed(10));
+  };
+  layout.forEach(k => {
+    if (!k) return;
+    const b = document.createElement('div');
+    b.className = 'btn' + ('÷×-+='.includes(k) ? ' op' : '');
+    b.textContent = k;
+    b.addEventListener('click', () => {
+      if (cur === 'Error' && k !== 'C') return;
+      if (/[0-9]/.test(k)) { cur = fresh ? k : (cur === '0' ? k : cur + k); fresh = false; }
+      else if (k === '.') { if (!cur.includes('.')) cur += '.'; fresh = false; }
+      else if (k === 'C') { cur = '0'; prev = null; op = null; fresh = true; }
+      else if (k === '±') cur = String(parseFloat(cur) * -1);
+      else if (k === '%') cur = String(parseFloat(cur) / 100);
+      else if ('÷×-+'.includes(k)) { if (op && !fresh) { cur = compute(); } prev = cur; op = k; fresh = true; }
+      else if (k === '=') { if (op) { cur = compute(); op = null; prev = null; fresh = true; } }
+      show();
+    });
+    keys.appendChild(b);
+  });
+  show();
+})();
+
+/* ── Minesweeper ────────────────────────────── */
+const mines = {
+  built: false, R: 9, C: 9, N: 10, grid: [], rev: 0, dead: false, t: 0, timer: null,
+  init(){
+    this.built = true; this.reset();
+  },
+  reset(){
+    clearInterval(this.timer); this.t = 0; this.dead = false; this.rev = 0;
+    document.getElementById('ms-timer').textContent = '000';
+    document.getElementById('ms-mines').textContent = String(this.N).padStart(3,'0');
+    document.getElementById('ms-face').textContent = '🙂';
+    const g = document.getElementById('ms-grid');
+    g.style.gridTemplateColumns = 'repeat('+this.C+', 20px)';
+    g.innerHTML = '';
+    this.grid = [];
+    // place mines
+    const cells = this.R * this.C, mset = new Set();
+    while (mset.size < this.N) mset.add(Math.floor(Math.random()*cells)); // random ok: user-triggered, not resume
+    for (let r=0;r<this.R;r++){ this.grid[r]=[]; for (let c=0;c<this.C;c++){
+      const idx=r*this.C+c;
+      this.grid[r][c]={mine:mset.has(idx),rev:false,flag:false,n:0};
+    }}
+    for (let r=0;r<this.R;r++)for(let c=0;c<this.C;c++){
+      if(this.grid[r][c].mine)continue; let n=0;
+      for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nr=r+dr,nc=c+dc;
+        if(nr>=0&&nr<this.R&&nc>=0&&nc<this.C&&this.grid[nr][nc].mine)n++;}
+      this.grid[r][c].n=n;
+    }
+    for (let r=0;r<this.R;r++)for(let c=0;c<this.C;c++){
+      const el=document.createElement('div'); el.className='cell'; el.dataset.r=r; el.dataset.c=c;
+      el.addEventListener('click',()=>this.reveal(r,c));
+      el.addEventListener('contextmenu',e=>{e.preventDefault();this.flag(r,c);});
+      g.appendChild(el);
+    }
+  },
+  startTimer(){ if(this.timer)return; this.timer=setInterval(()=>{ this.t=Math.min(999,this.t+1);
+    document.getElementById('ms-timer').textContent=String(this.t).padStart(3,'0'); },1000); },
+  cellEl(r,c){ return document.querySelector('.cell[data-r="'+r+'"][data-c="'+c+'"]'); },
+  flag(r,c){ const cell=this.grid[r][c]; if(cell.rev||this.dead)return; cell.flag=!cell.flag;
+    const el=this.cellEl(r,c); el.textContent=cell.flag?'🚩':'';
+    const flags=this.grid.flat().filter(x=>x.flag).length;
+    document.getElementById('ms-mines').textContent=String(Math.max(0,this.N-flags)).padStart(3,'0'); },
+  reveal(r,c){
+    const cell=this.grid[r][c]; if(cell.rev||cell.flag||this.dead)return;
+    this.startTimer();
+    if(cell.mine){ this.dead=true; clearInterval(this.timer);
+      document.getElementById('ms-face').textContent='💀';
+      this.grid.flat().forEach((x,i)=>{ if(x.mine){ const el=document.querySelectorAll('.cell')[i]; el.classList.add('rev','mine'); el.textContent='💣'; }});
+      return; }
+    const stack=[[r,c]];
+    while(stack.length){ const [cr,cc]=stack.pop(); const cl=this.grid[cr][cc];
+      if(cl.rev||cl.flag)continue; cl.rev=true; this.rev++;
+      const el=this.cellEl(cr,cc); el.classList.add('rev');
+      if(cl.n>0){ el.textContent=cl.n; el.classList.add('c'+cl.n); }
+      else { for(let dr=-1;dr<=1;dr++)for(let dc=-1;dc<=1;dc++){const nr=cr+dr,nc=cc+dc;
+        if(nr>=0&&nr<this.R&&nc>=0&&nc<this.C&&!this.grid[nr][nc].rev)stack.push([nr,nc]);} }
+    }
+    if(this.rev === this.R*this.C - this.N){ this.dead=true; clearInterval(this.timer);
+      document.getElementById('ms-face').textContent='😎'; }
+  }
+};
+document.getElementById('ms-face').addEventListener('click',()=>mines.reset());
+
+/* ── Boot sequence ──────────────────────────── */
+(function(){
+  const bar = document.getElementById('bootbar'), boot = document.getElementById('boot');
+  let p = 0;
+  const iv = setInterval(() => {
+    p += 8 + Math.floor(Math.random()*14);
+    if (p >= 100){ p = 100; clearInterval(iv);
+      setTimeout(() => { boot.classList.add('hidden'); openWin('about'); }, 350); }
+    bar.style.width = p + '%';
+  }, 130);
+})();
+</script>
+</body>
+</html>
