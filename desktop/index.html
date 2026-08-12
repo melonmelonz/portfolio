@@ -32,6 +32,8 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     transition: opacity .5s ease; }
   #boot.hidden { opacity: 0; pointer-events: none; }
+  :focus-visible { outline: 1px dotted #000; outline-offset: 2px; }
+  #startbtn:focus-visible, .icon:focus-visible { outline: 1px dotted #fff; }
   /* keep windows on-screen on phones (inline left/top would push them off) */
   @media (max-width: 640px) {
     .window { left: 3vw !important; right: 3vw; width: auto !important; max-width: 94vw; }
@@ -45,9 +47,11 @@
     transition: width .2s linear; }
 
   /* ── Desktop ────────────────────────────── */
-  #desktop { position: absolute; inset: 0 0 30px 0; padding: 8px; }
-  .icon { width: 78px; display: inline-flex; flex-direction: column; align-items: center;
-    gap: 3px; padding: 4px; margin: 2px; cursor: default; vertical-align: top; }
+  /* Win95 stacks icons in a column down the left, wrapping into a new column */
+  #desktop { position: absolute; inset: 0 0 30px 0; padding: 8px;
+    display: flex; flex-direction: column; flex-wrap: wrap; align-content: flex-start; }
+  .icon { width: 78px; display: flex; flex-direction: column; align-items: center;
+    gap: 3px; padding: 4px; margin: 2px; cursor: default; flex: 0 0 auto; }
   .icon .glyph { font-size: 30px; filter: drop-shadow(1px 1px 0 rgba(0,0,0,.35)); }
   .icon .label { color: #fff; font-size: 11px; text-align: center; padding: 1px 3px; line-height: 1.2; }
   .icon.selected .label { background: var(--navy); }
@@ -207,7 +211,7 @@
 </div>
 
 <!-- ── Windows ── -->
-<div class="window" id="about" style="width:440px;top:40px;left:60px">
+<div class="window" id="about" style="width:440px;top:40px;left:120px">
   <div class="title-bar"><span class="ti">🧑‍💻</span><span class="tt">About — penn.exe</span>
     <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
   <div class="win-body">
@@ -237,8 +241,8 @@
       Production pages for Google's developer conference via Left Field Labs. Headless Preact + Jinja/Python.</div>
     <div class="prj"><b>distributron</b> <span class="tagchip">[vue/jamstack]</span><br>
       Alcohol-delivery ecommerce startup. Geofencing, JAMstack, Y Combinator interview.</div>
-    <div class="prj"><b>treetz</b> <span class="tagchip">[ue5/c++]</span><br>
-      Indie mobile game, 8-bit space theme. Co-led a team of 6 from concept to launch.
+    <div class="prj"><b>treetz</b> <span class="tagchip">[unity]</span><br>
+      Unity mobile game, 8-bit space theme. Co-led a team of 6 from concept through production builds.
       <a href="https://treetz.pages.dev" target="_blank" rel="noopener">treetz.pages.dev</a></div>
     <div class="prj"><b>monero-multisig</b> <span class="tagchip">[rust]</span><br>
       M-of-N multisig wallet CLI. Key exchange, co-signing, submission.
@@ -325,7 +329,7 @@ or Start > Return to Modern Site.
   -- Penn</div>
 </div>
 
-<div class="window" id="mycomp" style="width:400px;top:100px;left:90px">
+<div class="window" id="mycomp" style="width:400px;top:100px;left:130px">
   <div class="title-bar"><span class="ti">🖥️</span><span class="tt">My Computer</span>
     <span class="tc" data-min>_</span><span class="tc" data-close>✕</span></div>
   <div class="win-body paper">
@@ -441,16 +445,37 @@ document.querySelectorAll('.window').forEach(w => {
     bar.addEventListener('pointermove', move); bar.addEventListener('pointerup', up);
   });
   w.addEventListener('pointerdown', () => focusWin(w.id));
-  w.querySelector('[data-close]').addEventListener('click', e => { e.stopPropagation(); closeWin(w.id); });
-  const m = w.querySelector('[data-min]'); if (m) m.addEventListener('click', e => { e.stopPropagation(); minWin(w.id); });
+  const c = w.querySelector('[data-close]');
+  const doClose = e => { if (e) e.stopPropagation(); closeWin(w.id); };
+  c.addEventListener('click', doClose);
+  c.setAttribute('aria-label', 'Close window');
+  keyActivate(c, doClose);
+  const m = w.querySelector('[data-min]');
+  if (m) {
+    const doMin = e => { if (e) e.stopPropagation(); minWin(w.id); };
+    m.addEventListener('click', doMin);
+    m.setAttribute('aria-label', 'Minimise window');
+    keyActivate(m, doMin);
+  }
 });
 
 /* ── Actions (icons, start menu, buttons) ───── */
 function goModern(){ location.href = '/'; }
+function keyActivate(el, fn){
+  if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+  if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); fn(e); }
+  });
+}
 function wire(el){
-  if (el.dataset.open !== undefined) el.addEventListener('click', () => openWin(el.dataset.open));
-  if (el.dataset.href !== undefined) el.addEventListener('click', () => { location.href = el.dataset.href; });
-  if (el.dataset.modern !== undefined) el.addEventListener('click', goModern);
+  let act = null;
+  if (el.dataset.open   !== undefined) act = () => openWin(el.dataset.open);
+  if (el.dataset.href   !== undefined) act = () => { location.href = el.dataset.href; };
+  if (el.dataset.modern !== undefined) act = goModern;
+  if (!act) return;
+  el.addEventListener('click', act);
+  keyActivate(el, act);
 }
 document.querySelectorAll('[data-open],[data-href],[data-modern]').forEach(wire);
 
@@ -472,6 +497,8 @@ function toggleStart(force){
   startbtn.classList.toggle('on', open);
 }
 startbtn.addEventListener('click', e => { e.stopPropagation(); toggleStart(); });
+keyActivate(startbtn, () => toggleStart());
+document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleStart(false); });
 document.addEventListener('click', () => toggleStart(false));
 startmenu.addEventListener('click', e => e.stopPropagation());
 document.querySelectorAll('#startmenu .smi').forEach(smi => smi.addEventListener('click', () => toggleStart(false)));

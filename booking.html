@@ -93,7 +93,7 @@
     }
     .field textarea { resize: vertical; min-height: 96px; padding-top: 0; }
     .field input::placeholder,
-    .field textarea::placeholder { color: var(--text-muted); opacity: 0.55; }
+    .field textarea::placeholder { color: var(--text-muted); opacity: 1; }
     .field input:focus,
     .field textarea:focus { color: #fff; }
 
@@ -169,7 +169,7 @@
   <!-- Nav -->
   <nav>
     <a href="/" class="nav-brand">
-      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/watmel-berry.png" width="20" height="20" alt="melon" style="image-rendering: pixelated;">
+      <img src="/assets/sprites/watmel-berry.png" width="20" height="20" alt="melon" style="image-rendering: pixelated;">
       <span>pcporterfield</span>
     </a>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
@@ -188,7 +188,7 @@
 Subject: request to book time</div>
       <h1>book time with me</h1>
       <p class="subtitle">async &middot; no calendar links &middot; just email</p>
-      <p>propose a time that works for you and drop a quick note. hit send and it opens in your email app, addressed to me &mdash; give it a final look and send. i'll reply from <span style="color:var(--amber)">lushfund@protonmail.ch</span> to lock it in. backups help if my first slot is taken.</p>
+      <p>propose a time that works for you and drop a quick note. hit send and it opens in your email app, addressed to me &mdash; give it a final look and send. i'll reply from <span style="color:var(--amber)">lushfund@protonmail.ch</span> to lock it in. backups help if your first choice doesn't work on my end.</p>
     </div>
 
     <form id="booking-form" class="compose" novalidate>
@@ -210,7 +210,7 @@ Subject: request to book time</div>
         </div>
         <div class="field">
           <label for="when">When</label>
-          <input type="text" id="when" name="when" placeholder="e.g. Tue Jul 28, 2pm ET" maxlength="160" required>
+          <input type="text" id="when" name="when" placeholder="e.g. Tuesday afternoon, 2 p.m. ET" maxlength="160" required>
         </div>
         <div class="field-row">
           <div class="field">
