@@ -56,6 +56,8 @@
     /* ── Header ── */
     h1 { font-size: 20pt; font-weight: 600; line-height: 1.1; }
 
+    .title { margin-top: 0.1rem; font-style: italic; font-size: 11pt; }
+
     .contact { margin-top: 0.25rem; color: var(--muted); }
     .contact span + span::before { content: "\00b7"; margin: 0 0.45em; }
 
@@ -64,6 +66,7 @@
       margin: 0.2in 0 0.08in;
       padding-bottom: 0.02in;
       border-bottom: 0.75pt solid var(--rule);
+      break-after: avoid;
       font-size: 10.5pt;
       font-weight: 600;
       font-variant: small-caps;
@@ -115,65 +118,62 @@
 
     <header>
       <h1>Penn Cameron Porterfield</h1>
+      <div class="title">Senior Cloud &amp; Software Engineer</div>
       <div class="contact">
         <span><a href="mailto:lushfund@protonmail.ch">lushfund@protonmail.ch</a></span><span><a href="https://penn.goolz.org">penn.goolz.org</a></span><span><a href="https://github.com/melonmelonz">github.com/melonmelonz</a></span><span>US Eastern</span>
       </div>
     </header>
 
     <h2>Summary</h2>
-    <p>Cloud and software engineer with 8+ years across consulting, agency work, and early-stage startups. Builds applications and the infrastructure under them on AWS, Azure, and GCP. Earlier: DARPA-funded research at Penn State's Applied Research Laboratory with a DoD Secret clearance. Currently in Georgia Tech's M.S. in Computer Science (Computing Systems).</p>
+    <p>Senior engineer with over a decade in technical roles, from DARPA-funded research at Penn State's Applied Research Laboratory to founding and running a cloud and software consultancy. Designs and builds cloud infrastructure on AWS, Azure, and GCP and the applications on top of it, owning the work from architecture through production. Two-time startup co-founder; former DoD Secret clearance holder.</p>
 
     <h2>Experience</h2>
 
     <div class="job">
-      <div class="line"><span><strong>Samwise Development</strong>, Founder</span><span class="d">2022&ndash;present</span></div>
-      <p>Independent consultancy. Full-stack applications for clients and the cloud infrastructure they run on.</p>
+      <div class="line"><span><strong>Samwise Development</strong>, Founder &amp; Principal Engineer</span><span class="d">2022&ndash;present</span></div>
+      <p>Founded and run an independent cloud and software consultancy. Own each client engagement end to end: scoping, architecture, full-stack build, and the cloud infrastructure it runs on.</p>
     </div>
 
     <div class="job">
-      <div class="line"><span><strong>Google I/O</strong> via Left Field Labs, Full-Stack Developer <em>(contract, remote)</em></span><span class="d">2021&ndash;2022</span></div>
-      <p>Built production pages for Google I/O. Headless Preact, Jinja, Python.</p>
+      <div class="line"><span><strong>Google I/O</strong> via Left Field Labs, Full-Stack Developer <em>(contract)</em></span><span class="d">2021&ndash;2022</span></div>
+      <p>Built and shipped production pages for Google's developer conference. Headless Preact, Jinja, Python.</p>
     </div>
 
     <div class="job">
-      <div class="line"><span><strong>Distributron</strong>, Co-founder and Developer</span><span class="d">2020&ndash;2021</span></div>
-      <p>Alcohol delivery startup; reached a Y Combinator interview. Vue, geofencing, JAMstack.</p>
+      <div class="line"><span><strong>Distributron</strong>, Co-founder &amp; Lead Developer</span><span class="d">2020&ndash;2021</span></div>
+      <p>Co-founded an on-demand alcohol delivery company and built the platform: Vue front end, geofenced delivery, JAMstack architecture. Took the company through a Y Combinator interview.</p>
     </div>
 
     <div class="job">
       <div class="line"><span><strong>Treetz</strong>, Co-founder</span><span class="d">2019&ndash;2020</span></div>
-      <p>Indie studio. Co-led a team of six developers and artists on an 8-bit space game for mobile (Unity), from concept to production builds.</p>
+      <p>Co-led a six-person team of developers and artists taking a Unity mobile game from concept to production.</p>
     </div>
 
     <div class="job">
       <div class="line"><span><strong>Safety+</strong>, Software Developer</span><span class="d">2019&ndash;2020</span></div>
-      <p>React and Firebase app for real-time factory safety incident tracking. Early clients included Coca-Cola.</p>
+      <p>Built a real-time factory safety incident platform (React, Firebase); early clients included Coca-Cola.</p>
     </div>
 
     <div class="job">
       <div class="line"><span><strong>1SEO Digital Agency</strong>, Developer <em>(Philadelphia)</em></span><span class="d">2018&ndash;2019</span></div>
-      <p>Client sites on WordPress, Drupal, Joomla, and Magento; React and Vue front ends.</p>
+      <p>Delivered client sites on WordPress, Drupal, Joomla, and Magento with React and Vue front ends.</p>
     </div>
 
     <div class="job">
       <div class="line"><span><strong>Penn State Applied Research Laboratory</strong>, Data Analyst</span><span class="d">2010&ndash;2013</span></div>
-      <p>DARPA-funded work in the Underwater Acoustics Department. Data analysis in MATLAB for autonomous underwater vehicles. DoD Secret clearance (since lapsed).</p>
+      <p>Analyzed data for autonomous underwater vehicle systems on DARPA-funded programs in the Underwater Acoustics Department (MATLAB). Held a DoD Secret clearance.</p>
     </div>
 
     <h2>Education</h2>
     <div class="edu line"><span><strong>Georgia Institute of Technology</strong>, M.S. Computer Science, Computing Systems</span><span class="d">in progress</span></div>
     <div class="edu line"><span><strong>Western Governors University</strong>, B.S. Network and Cloud Engineering</span><span class="d">2026</span></div>
-    <div class="edu line"><span><strong>The Pennsylvania State University</strong>, coursework in Computer Engineering and Security &amp; Risk Analysis</span><span class="d">2011&ndash;2014</span></div>
 
-    <h2>Certifications</h2>
-    <p>CompTIA Security+, CompTIA Network+, CompTIA A+, ITIL 4 Foundation, LPI Linux Essentials</p>
-
-    <h2>Skills</h2>
+    <h2>Skills &amp; Certifications</h2>
     <dl class="skills">
+      <dt>Cloud</dt>   <dd>AWS, Azure, GCP, Cloudflare, Kubernetes</dd>
       <dt>Systems</dt> <dd>Rust, C, Linux kernel, embedded (SPI)</dd>
       <dt>Web</dt>     <dd>TypeScript, React, Vue, PHP/Laravel, Python</dd>
-      <dt>Cloud</dt>   <dd>AWS, Azure, GCP, Cloudflare, Kubernetes</dd>
-      <dt>Other</dt>   <dd>Unity, MATLAB</dd>
+      <dt>Certified</dt> <dd>CompTIA Security+, CompTIA Network+, ITIL 4 Foundation</dd>
     </dl>
 
   </div>
