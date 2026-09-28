@@ -3,478 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Penn Cameron Porterfield &mdash; Resume</title>
-  <meta name="description" content="Printable resume of Penn Cameron Porterfield — senior cloud and software engineer." />
+  <title>Penn Cameron Porterfield, Resume</title>
+  <meta name="description" content="Printable resume of Penn Cameron Porterfield, cloud and software engineer." />
   <link rel="icon" href="/assets/sprites/watmel-berry.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --aqua:       #34b8cb;
-      --aqua-text:  #25818f;
-      --teal:       #1c8292;
-      --text-dark:  #162e3a;
-      --text-mid:   #3a5a6e;
-      --text-soft:  #5f7a88;
-      --rule:       rgba(52,184,203,0.18);
+      --ink:   #1d1d1b;
+      --muted: #5c5a55;
+      --rule:  #c9c6be;
     }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-weight: 300;
-      font-size: 9pt;
-      color: var(--text-dark);
-      background: #f0f8fc;
-      padding: 2rem;
+      font: 10pt/1.4 'Source Serif 4', Georgia, serif;
+      color: var(--ink);
+      background: #e9e7e2;
     }
 
-    /* Screen: show it centered on a page-like card */
-    @media screen {
-      body { min-height: 100vh; display: flex; justify-content: center; align-items: flex-start; }
-      .page {
-        width: min(8.27in, 100%);
-        min-height: 11in;
-        background: #fff;
-        border: 1px solid rgba(52,184,203,0.22);
-        border-radius: 12px;
-        box-shadow: 0 8px 40px rgba(40,150,175,0.14), 0 1px 6px rgba(40,160,185,0.08);
-        overflow: hidden;
-      }
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 1.5rem auto 1rem;
+      padding: 0.6in 0.7in;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
 
-    /* Mobile */
-    @media screen and (max-width: 640px) {
-      body { padding: 0; background: #fff; }
-      .page { min-height: unset; border-radius: 0; border: none; box-shadow: none; }
-      .columns { grid-template-columns: 1fr; }
-      .sidebar { border-right: none; border-bottom: 1px solid rgba(52,184,203,0.14); }
-      .r-job-top { flex-direction: column; gap: 0.1rem; }
-      .r-dates { white-space: normal; }
-    }
-
-    @media print {
-      body { background: #fff; padding: 0; }
-      .page { width: 100%; box-shadow: none; border: none; border-radius: 0; }
-      .no-print { display: none !important; }
-      .print-footer { display: block !important; }
-      @page { margin: 0.45in 0.55in; size: letter; }
-    }
-
-    /* ── Print footer ────────────────────────── */
-    .print-footer {
-      display: none;
-      text-align: center;
-      padding: 0.5rem 1.5rem 0.4rem;
-      font-size: 7pt;
-      color: var(--text-soft);
-      border-top: 1px solid rgba(52,184,203,0.14);
-    }
-
-    /* ── Print button (screen only) ─────────── */
-    .print-bar {
-      display: flex;
-      justify-content: flex-end;
-      padding: 0.8rem 1.2rem 0;
-    }
-
-    .print-btn {
-      padding: 0.3rem 1rem;
-      background: rgba(52,184,203,0.12);
-      border: 1px solid rgba(52,184,203,0.30);
-      border-radius: 999px;
-      font-family: inherit;
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: var(--teal);
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    .print-btn:hover { background: rgba(52,184,203,0.22); }
-
-    /* ── Header ─────────────────────────────── */
-    .resume-header {
-      padding: 1.0rem 1.5rem 0.8rem;
-      border-bottom: 2px solid var(--aqua);
-      background: linear-gradient(175deg, #eaf7fb 0%, #f4fbfd 100%);
-      position: relative;
-    }
-
-    .resume-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--teal), var(--aqua), #7dd8e8);
-    }
-
-    .rh-name {
-      font-size: 19pt;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--text-dark);
-      line-height: 1.1;
-    }
-
-    .rh-title {
-      margin-top: 0.25rem;
-      font-size: 10pt;
-      font-weight: 400;
-      color: var(--teal);
-    }
-
-    .rh-contact {
-      margin-top: 0.45rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem 1.4rem;
-      font-size: 8pt;
-      color: var(--text-soft);
-    }
-
-    .rh-contact a {
-      color: var(--text-soft);
-      text-decoration: none;
-    }
-
-    /* ── Two-column layout ──────────────────── */
-    .columns {
-      display: grid;
-      grid-template-columns: 1fr 2.2fr;
-    }
-
-    /* ── Sidebar ────────────────────────────── */
-    .sidebar {
-      padding: 0.9rem 1.0rem 1.0rem 1.2rem;
-      border-right: 1px solid rgba(52,184,203,0.14);
-      background: linear-gradient(180deg, #f4fbfd 0%, #f8fdfe 100%);
-    }
-
-    /* ── Main ───────────────────────────────── */
-    .main {
-      padding: 0.9rem 1.2rem 1.0rem 1.0rem;
-    }
-
-    /* ── Section ────────────────────────────── */
-    .r-section {
-      margin-bottom: 0.85rem;
-    }
-
-    .r-section:last-child { margin-bottom: 0; }
-
-    .r-title {
-      font-size: 6.5pt;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--aqua-text);
-      padding-bottom: 0.25rem;
-      border-bottom: 1px solid var(--rule);
-      margin-bottom: 0.5rem;
-    }
-
-    /* ── Summary ────────────────────────────── */
-    .r-summary {
-      font-size: 8pt;
-      line-height: 1.6;
-      color: var(--text-mid);
-    }
-
-    /* ── Jobs ───────────────────────────────── */
-    .r-job {
-      margin-bottom: 0.6rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid rgba(52,184,203,0.10);
-      padding-left: 0.7rem;
-      border-left: 2px solid rgba(52,184,203,0.28);
-    }
-
-    .r-job:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-
-    .r-job-top {
+    .screen-bar {
+      width: 8.5in;
+      margin: 1.2rem auto 0;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      gap: 0.5rem;
+      font: 0.85rem/1 system-ui, sans-serif;
     }
 
-    .r-company {
-      font-size: 9pt;
+    .screen-bar a { color: #444; text-decoration: underline; text-underline-offset: 2px; }
+    .screen-bar button {
+      font: inherit;
+      padding: 0.35rem 0.8rem;
+      border: 1px solid #999;
+      border-radius: 3px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    /* ── Header ── */
+    h1 { font-size: 20pt; font-weight: 600; line-height: 1.1; }
+
+    .contact { margin-top: 0.25rem; color: var(--muted); }
+    .contact span + span::before { content: "\00b7"; margin: 0 0.45em; }
+
+    /* ── Sections ── */
+    h2 {
+      margin: 0.2in 0 0.08in;
+      padding-bottom: 0.02in;
+      border-bottom: 0.75pt solid var(--rule);
+      font-size: 10.5pt;
       font-weight: 600;
-      color: var(--text-dark);
-      line-height: 1.3;
+      font-variant: small-caps;
+      letter-spacing: 0.03em;
     }
 
-    .r-company-sub {
-      font-weight: 300;
-      color: var(--text-soft);
-    }
+    .job { margin-bottom: 0.1in; break-inside: avoid; }
+    .job:last-child { margin-bottom: 0; }
 
-    .r-dates {
-      font-size: 7.5pt;
-      color: var(--text-soft);
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    .r-role {
-      font-size: 8pt;
-      font-weight: 400;
-      color: var(--teal);
-      margin-top: 0.08rem;
-    }
-
-    .r-desc {
-      margin-top: 0.2rem;
-      font-size: 7.5pt;
-      line-height: 1.55;
-      color: var(--text-mid);
-    }
-
-    /* ── Edu / Cert items ───────────────────── */
-    .r-edu {
-      margin-bottom: 0.45rem;
-    }
-
-    .r-edu:last-child { margin-bottom: 0; }
-
-    .r-edu-school {
-      font-size: 8.5pt;
-      font-weight: 500;
-      color: var(--text-dark);
-      line-height: 1.3;
-    }
-
-    .r-edu-meta {
-      font-size: 7.5pt;
-      color: var(--text-mid);
-      margin-top: 0.05rem;
-    }
-
-    .r-edu-dates {
-      font-size: 7pt;
-      color: var(--text-soft);
-    }
-
-    .badge {
-      display: inline-block;
-      margin-left: 0.3rem;
-      padding: 0.08rem 0.4rem;
-      background: rgba(52,184,203,0.10);
-      border: 1px solid rgba(52,184,203,0.26);
-      border-radius: 999px;
-      font-size: 6.5pt;
-      font-weight: 500;
-      color: var(--teal);
-      letter-spacing: 0.04em;
-      vertical-align: middle;
-    }
-
-    /* ── Tags ───────────────────────────────── */
-    .r-tags {
+    .line {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
+      justify-content: space-between;
+      gap: 1rem;
     }
 
-    .r-tag {
-      padding: 0.18rem 0.6rem;
-      background: #eaf7fb;
-      border: 1px solid rgba(52,184,203,0.22);
-      border-radius: 999px;
-      font-size: 7.5pt;
-      color: var(--text-mid);
+    .line .d { color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .job strong, .edu strong { font-weight: 600; }
+    .job em { color: var(--muted); }
+    .job p { margin-top: 0.02in; }
+
+    .edu { margin-bottom: 0.04in; }
+
+    .skills { display: grid; grid-template-columns: 0.8in 1fr; gap: 0.02in 0.1in; }
+    .skills dt { font-style: italic; color: var(--muted); }
+
+    @media print {
+      body { background: none; }
+      .page { width: auto; min-height: 0; margin: 0; padding: 0; box-shadow: none; }
+      .screen-bar { display: none; }
+      @page { size: letter; margin: 0.55in 0.65in; }
+    }
+
+    @media screen and (max-width: 8.7in) {
+      body { background: #fff; }
+      .screen-bar { width: auto; margin: 1rem 1rem 0; }
+      .page { width: auto; min-height: 0; margin: 0; padding: 1.2rem 1rem 2rem; box-shadow: none; }
+      .line { flex-direction: column; gap: 0; }
     }
   </style>
 </head>
 <body>
-<div class="page">
 
-  <div class="print-bar no-print">
-    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+  <div class="screen-bar">
+    <a href="/cv">&larr; Full CV</a>
+    <button onclick="window.print()">Print / save as PDF</button>
   </div>
 
-  <header class="resume-header">
-    <h1 class="rh-name">Penn Cameron Porterfield</h1>
-    <div class="rh-title">Senior Cloud &amp; Software Engineer</div>
-    <div class="rh-contact">
-      <a href="mailto:lushfund@protonmail.ch">lushfund@protonmail.ch</a>
-      <a href="https://penn.goolz.org">penn.goolz.org</a>
-      <a href="https://github.com/melonmelonz">github.com/melonmelonz</a>
-      <span>Eastern Time</span>
-      <span class="no-print" style="font-style:italic;opacity:0.6;" title="OpSec &amp; privacy — intentionally not on LinkedIn">no LinkedIn (by design)</span>
+  <div class="page">
+
+    <header>
+      <h1>Penn Cameron Porterfield</h1>
+      <div class="contact">
+        <span><a href="mailto:lushfund@protonmail.ch">lushfund@protonmail.ch</a></span><span><a href="https://penn.goolz.org">penn.goolz.org</a></span><span><a href="https://github.com/melonmelonz">github.com/melonmelonz</a></span><span>US Eastern</span>
+      </div>
+    </header>
+
+    <h2>Summary</h2>
+    <p>Cloud and software engineer with 8+ years across consulting, agency work, and early-stage startups. Builds applications and the infrastructure under them on AWS, Azure, and GCP. Earlier: DARPA-funded research at Penn State's Applied Research Laboratory with a DoD Secret clearance. Currently in Georgia Tech's M.S. in Computer Science (Computing Systems).</p>
+
+    <h2>Experience</h2>
+
+    <div class="job">
+      <div class="line"><span><strong>Samwise Development</strong>, Founder</span><span class="d">2022&ndash;present</span></div>
+      <p>Independent consultancy. Full-stack applications for clients and the cloud infrastructure they run on.</p>
     </div>
-  </header>
 
-  <div class="columns">
+    <div class="job">
+      <div class="line"><span><strong>Google I/O</strong> via Left Field Labs, Full-Stack Developer <em>(contract, remote)</em></span><span class="d">2021&ndash;2022</span></div>
+      <p>Built production pages for Google I/O. Headless Preact, Jinja, Python.</p>
+    </div>
 
-    <!-- ── Sidebar ───────────────────────── -->
-    <aside class="sidebar">
+    <div class="job">
+      <div class="line"><span><strong>Distributron</strong>, Co-founder and Developer</span><span class="d">2020&ndash;2021</span></div>
+      <p>Alcohol delivery startup; reached a Y Combinator interview. Vue, geofencing, JAMstack.</p>
+    </div>
 
-      <div class="r-section">
-        <h2 class="r-title">Education</h2>
+    <div class="job">
+      <div class="line"><span><strong>Treetz</strong>, Co-founder</span><span class="d">2019&ndash;2020</span></div>
+      <p>Indie studio. Co-led a team of six developers and artists on an 8-bit space game for mobile (Unity), from concept to production builds.</p>
+    </div>
 
-        <div class="r-edu">
-          <div class="r-edu-school">Georgia Institute of Technology</div>
-          <div class="r-edu-meta">M.S. Computer Science &mdash; Computing Systems</div>
-          <div class="r-edu-dates">In progress</div>
-        </div>
+    <div class="job">
+      <div class="line"><span><strong>Safety+</strong>, Software Developer</span><span class="d">2019&ndash;2020</span></div>
+      <p>React and Firebase app for real-time factory safety incident tracking. Early clients included Coca-Cola.</p>
+    </div>
 
-        <div class="r-edu">
-          <div class="r-edu-school">Western Governors University</div>
-          <div class="r-edu-meta">B.S. Network &amp; Cloud Engineering</div>
-          <div class="r-edu-dates">Graduated 2026</div>
-        </div>
+    <div class="job">
+      <div class="line"><span><strong>1SEO Digital Agency</strong>, Developer <em>(Philadelphia)</em></span><span class="d">2018&ndash;2019</span></div>
+      <p>Client sites on WordPress, Drupal, Joomla, and Magento; React and Vue front ends.</p>
+    </div>
 
-        <div class="r-edu">
-          <div class="r-edu-school">The Pennsylvania State University</div>
-          <div class="r-edu-meta">Computer Engineering &amp; Security and Risk Analysis</div>
-          <div class="r-edu-dates">2011&ndash;2014 &middot; coursework</div>
-        </div>
-      </div>
+    <div class="job">
+      <div class="line"><span><strong>Penn State Applied Research Laboratory</strong>, Data Analyst</span><span class="d">2010&ndash;2013</span></div>
+      <p>DARPA-funded work in the Underwater Acoustics Department. Data analysis in MATLAB for autonomous underwater vehicles. DoD Secret clearance (since lapsed).</p>
+    </div>
 
-      <div class="r-section">
-        <h2 class="r-title">Certifications</h2>
-        <div class="r-edu">
-          <div class="r-edu-school">CompTIA Security+</div>
-        </div>
-        <div class="r-edu">
-          <div class="r-edu-school">CompTIA Network+</div>
-        </div>
-        <div class="r-edu">
-          <div class="r-edu-school">CompTIA A+</div>
-        </div>
-        <div class="r-edu">
-          <div class="r-edu-school">ITIL 4 Foundation</div>
-        </div>
-        <div class="r-edu">
-          <div class="r-edu-school">LPI Linux Essentials</div>
-        </div>
-      </div>
+    <h2>Education</h2>
+    <div class="edu line"><span><strong>Georgia Institute of Technology</strong>, M.S. Computer Science, Computing Systems</span><span class="d">in progress</span></div>
+    <div class="edu line"><span><strong>Western Governors University</strong>, B.S. Network and Cloud Engineering</span><span class="d">2026</span></div>
+    <div class="edu line"><span><strong>The Pennsylvania State University</strong>, coursework in Computer Engineering and Security &amp; Risk Analysis</span><span class="d">2011&ndash;2014</span></div>
 
-      <div class="r-section">
-        <h2 class="r-title">Skills</h2>
-        <div class="r-tags">
-          <span class="r-tag">Rust</span>
-          <span class="r-tag">C</span>
-          <span class="r-tag">Systems Programming</span>
-          <span class="r-tag">Linux Kernel</span>
-          <span class="r-tag">Embedded / SPI</span>
-          <span class="r-tag">TypeScript</span>
-          <span class="r-tag">React</span>
-          <span class="r-tag">Vue</span>
-          <span class="r-tag">PHP / Laravel</span>
-          <span class="r-tag">Python</span>
-          <span class="r-tag">AWS</span>
-          <span class="r-tag">Azure</span>
-          <span class="r-tag">GCP</span>
-          <span class="r-tag">Cloudflare</span>
-          <span class="r-tag">Kubernetes</span>
-          <span class="r-tag">Unity</span>
-          <span class="r-tag">MATLAB</span>
-        </div>
-      </div>
+    <h2>Certifications</h2>
+    <p>CompTIA Security+, CompTIA Network+, CompTIA A+, ITIL 4 Foundation, LPI Linux Essentials</p>
 
-      <div class="r-section">
-        <h2 class="r-title">Interests</h2>
-        <div class="r-tags">
-          <span class="r-tag">Music</span>
-          <span class="r-tag">Travel</span>
-          <span class="r-tag">Cooking</span>
-        </div>
-      </div>
-
-    </aside>
-
-    <!-- ── Main ──────────────────────────── -->
-    <main class="main">
-
-      <div class="r-section">
-        <h2 class="r-title">Summary</h2>
-        <p class="r-summary">Senior cloud engineer and full-stack developer with 8+ years of experience across independent consulting, agency work, and venture-backed startups. Focused on cloud architecture, DevOps, and end-to-end delivery of production systems on AWS, Azure, and GCP. Background includes DARPA-funded DoD research, ecommerce, and production work for Google. Holds a B.S. in Network and Cloud Engineering from WGU and is pursuing an M.S. in Computer Science (Computing Systems) at Georgia Tech.</p>
-      </div>
-
-      <div class="r-section">
-        <h2 class="r-title">Experience</h2>
-
-        <div class="r-job">
-          <div class="r-job-top">
-            <div class="r-company">Samwise Development</div>
-            <div class="r-dates">2022 &ndash; Present</div>
-          </div>
-          <div class="r-role">Founder &mdash; Cloud &amp; Software Consultancy</div>
-          <div class="r-desc">Cloud and software development consultancy serving clients across industries. Full-stack development, cloud infrastructure, and end-to-end project delivery at any scale.</div>
-        </div>
-
-        <div class="r-job">
-          <div class="r-job-top">
-            <div class="r-company">Google I/O <span class="r-company-sub">&mdash; Contract</span></div>
-            <div class="r-dates">2021 &ndash; 2022</div>
-          </div>
-          <div class="r-role">Full Stack Developer &mdash; Remote</div>
-          <div class="r-desc">Shipped production pages for Google I/O via Left Field Labs. Headless Preact with Jinja and Python.</div>
-        </div>
-
-        <div class="r-job">
-          <div class="r-job-top">
-            <div class="r-company">Distributron</div>
-            <div class="r-dates">2020 &ndash; 2021</div>
-          </div>
-          <div class="r-role">Software Developer, Co-founder</div>
-          <div class="r-desc">Alcohol delivery ecommerce startup; reached Y Combinator interview. Vue, geofencing, JAMstack.</div>
-        </div>
-
-        <div class="r-job">
-          <div class="r-job-top">
-            <div class="r-company">Treetz</div>
-            <div class="r-dates">2019 &ndash; 2020</div>
-          </div>
-          <div class="r-role">Co-founder &mdash; Indie Game Development</div>
-          <div class="r-desc">Unity mobile game with an 8-bit space theme. Co-led a team of 6 — developers and artists — from concept through production builds.</div>
-        </div>
-
-        <div class="r-job">
-          <div class="r-job-top">
-            <div class="r-company">Safety+</div>
-            <div class="r-dates">2019 &ndash; 2020</div>
-          </div>
-          <div class="r-role">Software Developer</div>
-          <div class="r-desc">React SPA built on Firebase for real-time factory safety incident tracking. Initial clients included Coca-Cola.</div>
-        </div>
-
-        <div class="r-job">
-          <div class="r-job-top">
-            <div class="r-company">1SEO Digital Agency <span class="r-company-sub">&mdash; Philadelphia</span></div>
-            <div class="r-dates">2018 &ndash; 2019</div>
-          </div>
-          <div class="r-role">Developer</div>
-          <div class="r-desc">Multi-client agency across WordPress, Drupal, Joomla, and Magento. React, Vue, ES6+.</div>
-        </div>
-
-        <div class="r-job">
-          <div class="r-job-top">
-            <div class="r-company">PSU Applied Research Laboratory</div>
-            <div class="r-dates">2010 &ndash; 2013</div>
-          </div>
-          <div class="r-role">Data Analyst &mdash; Underwater Acoustics</div>
-          <div class="r-desc">DARPA-funded research in the Underwater Acoustics Department. Held a DoD Secret clearance (since lapsed). Data analytics and MATLAB for autonomous underwater vehicle systems.</div>
-        </div>
-
-      </div>
-
-    </main>
+    <h2>Skills</h2>
+    <dl class="skills">
+      <dt>Systems</dt> <dd>Rust, C, Linux kernel, embedded (SPI)</dd>
+      <dt>Web</dt>     <dd>TypeScript, React, Vue, PHP/Laravel, Python</dd>
+      <dt>Cloud</dt>   <dd>AWS, Azure, GCP, Cloudflare, Kubernetes</dd>
+      <dt>Other</dt>   <dd>Unity, MATLAB</dd>
+    </dl>
 
   </div>
 
-  <div class="back-link no-print" style="text-align:center;padding:0 0 1.2rem;font-size:0.78rem">
-    <a href="/cv" style="color:var(--teal);text-decoration:none">&laquo; back to the full CV</a>
-  </div>
-
-  <div class="print-footer">penn.goolz.org &nbsp;&bull;&nbsp; lushfund@protonmail.ch &nbsp;&bull;&nbsp; github.com/melonmelonz</div>
-
-</div>
 </body>
 </html>

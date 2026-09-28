@@ -3,613 +3,282 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Penn Cameron Porterfield — CV</title>
-  <meta name="description" content="CV of Penn Cameron Porterfield — senior cloud and software engineer. Cloud architecture, DevOps, and full-stack delivery on AWS, Azure, and GCP." />
+  <title>Penn Cameron Porterfield, CV</title>
+  <meta name="description" content="CV of Penn Cameron Porterfield, cloud and software engineer." />
   <link rel="icon" href="/assets/sprites/watmel-berry.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --aqua:        #34b8cb;
-      --aqua-text:   #217582;
-      --aqua-light:  #7dd8e8;
-      --teal:        #197584;
-      --glass:       rgba(255,255,255,0.50);
-      --glass-hi:    rgba(255,255,255,0.70);
-      --glass-border: rgba(255,255,255,0.72);
-      --text-dark:   #162e3a;
-      --text-mid:    #3a5a6e;
-      --text-soft:   #556e7e;
+      --paper: #fbfaf7;
+      --ink:   #1d1d1b;
+      --muted: #66645e;
+      --rule:  #d9d6ce;
+      --link:  #8c2f39;
+      --serif: 'Source Serif 4', Georgia, serif;
+      --mono:  'IBM Plex Mono', ui-monospace, monospace;
     }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-weight: 300;
-      color: var(--text-dark);
-      min-height: 100vh;
-      background:
-        radial-gradient(ellipse 65% 55% at 12% 18%, rgba(90,200,225,0.42) 0%, transparent 65%),
-        radial-gradient(ellipse 55% 65% at 88% 12%, rgba(190,228,252,0.60) 0%, transparent 62%),
-        radial-gradient(ellipse 75% 55% at 55% 90%, rgba(120,218,192,0.38) 0%, transparent 68%),
-        radial-gradient(ellipse 48% 58% at 4%  78%, rgba(165,208,242,0.48) 0%, transparent 62%),
-        radial-gradient(ellipse 60% 45% at 92% 68%, rgba(140,225,210,0.32) 0%, transparent 65%),
-        linear-gradient(158deg, #aed6ee 0%, #cce7f6 38%, #b8dfd5 72%, #d2f0e4 100%);
-      padding: 3rem 1.5rem 4rem;
+      background: var(--paper);
+      color: var(--ink);
+      font: 17px/1.55 var(--serif);
+      padding: 4.5rem 1.25rem 5rem;
     }
 
-    /* ── Card ───────────────────────────────── */
-    .card {
-      max-width: 820px;
-      margin: 0 auto;
-      background: var(--glass);
-      border: 1px solid var(--glass-border);
-      border-radius: 26px;
-      box-shadow:
-        0 12px 48px rgba(40,150,175,0.16),
-        0  2px 10px rgba(40,170,200,0.10),
-        inset 0 1px 0 rgba(255,255,255,0.85);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-    }
+    a { color: var(--link); text-underline-offset: 2px; text-decoration-thickness: 1px; }
+    a:hover { text-decoration-thickness: 2px; }
 
-    /* ── Header ─────────────────────────────── */
-    .header {
-      padding: 2.6rem 3rem 2.1rem;
-      border-radius: 26px 26px 0 0;
-      border-bottom: 1px solid rgba(255,255,255,0.55);
-      background: linear-gradient(180deg, rgba(255,255,255,0.42) 0%, rgba(255,255,255,0.08) 100%);
+    .doc {
       position: relative;
+      z-index: 1;
+      max-width: 42rem;
+      margin: 0 auto;
     }
 
-    .header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent 0%, var(--aqua-light) 40%, var(--aqua) 60%, transparent 100%);
-      opacity: 0.75;
-    }
-
-    .name {
-      font-size: 2.5rem;
+    /* ── Header ── */
+    h1 {
+      font-size: 2.1rem;
       font-weight: 600;
-      letter-spacing: -0.025em;
-      line-height: 1.1;
-      color: var(--text-dark);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
     }
 
-    .tagline {
-      margin-top: 0.4rem;
-      font-size: 1rem;
-      font-weight: 400;
-      color: var(--teal);
-      letter-spacing: 0.01em;
-    }
+    .role { margin-top: 0.2rem; font-style: italic; color: var(--muted); }
 
     .contact {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.55rem;
-      margin-top: 1.25rem;
+      margin-top: 1rem;
+      font: 0.8rem/1.9 var(--mono);
+      color: var(--muted);
     }
 
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.28rem 0.9rem;
-      background: rgba(255,255,255,0.62);
-      border: 1px solid rgba(255,255,255,0.82);
-      border-radius: 999px;
-      font-size: 0.78rem;
-      font-weight: 400;
-      color: var(--text-mid);
-      text-decoration: none;
-      transition: background 0.15s, box-shadow 0.15s;
-      box-shadow: 0 1px 4px rgba(40,160,185,0.08);
-    }
+    .contact a { color: var(--ink); }
+    .contact .sep { margin: 0 0.1rem; color: var(--rule); }
 
-    .pill:hover {
-      background: rgba(255,255,255,0.88);
-      box-shadow: 0 3px 14px rgba(40,170,200,0.18);
-    }
-
-    .pill-tooltip {
-      position: relative;
-      cursor: help;
-    }
-
-    .pill-tooltip .tooltip-text {
-      display: none;
-      position: absolute;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(22,46,58,0.93);
-      color: #e8f4f8;
-      font-size: 0.72rem;
-      font-weight: 400;
-      line-height: 1.5;
-      padding: 0.45rem 0.8rem;
-      border-radius: 8px;
-      width: max-content;
-      max-width: min(260px, 60vw);
-      text-align: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.22);
-      z-index: 30;
-      pointer-events: none;
-    }
-
-    .pill-tooltip .tooltip-text::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 5px solid transparent;
-      border-top-color: rgba(22,46,58,0.93);
-    }
-
-    .pill-tooltip:hover .tooltip-text {
-      display: block;
-    }
-
-    /* ── Body ───────────────────────────────── */
-    .body {
-      padding: 2.2rem 3rem 2.6rem;
-    }
-
-    .section {
-      margin-bottom: 2.4rem;
-    }
-
-    .section:last-child { margin-bottom: 0; }
-
-    .section-title {
-      font-size: 0.66rem;
+    /* ── Sections ── */
+    h2 {
+      margin: 2.6rem 0 1rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--rule);
+      font-size: 1.05rem;
       font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--aqua-text);
-      margin-bottom: 1.1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid rgba(52,184,203,0.18);
     }
 
-    /* ── Summary ────────────────────────────── */
-    .summary {
-      font-size: 0.9rem;
-      line-height: 1.8;
-      color: var(--text-mid);
-    }
+    p + p { margin-top: 0.8rem; }
 
-    /* ── Jobs ───────────────────────────────── */
-    .job {
+    /* Dates hang in a left column, like a printed CV */
+    .entry {
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0 1.5rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(255,255,255,0.5);
-      align-items: start;
+      grid-template-columns: 7.5rem 1fr;
+      gap: 0 1rem;
+      margin-bottom: 1.3rem;
     }
 
-    .job:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .entry:last-child { margin-bottom: 0; }
 
-    .job-left {
-      border-left: 2px solid rgba(52,184,203,0.30);
-      padding-left: 1rem;
+    .when {
+      font: 0.78rem/1.55 var(--mono);
+      color: var(--muted);
+      padding-top: 0.2rem;
     }
 
-    .job-company {
-      font-size: 0.94rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      line-height: 1.3;
-    }
+    .what strong { font-weight: 600; }
+    .what .sub { color: var(--muted); }
+    .what p { margin-top: 0.25rem; }
 
-    .job-sub {
-      font-weight: 300;
-      color: var(--text-soft);
-    }
+    .plain { list-style: none; }
+    .plain li + li { margin-top: 0.15rem; }
 
-    .job-role {
-      margin-top: 0.12rem;
-      font-size: 0.83rem;
-      font-weight: 400;
-      color: var(--teal);
-    }
+    dl.skills { display: grid; grid-template-columns: 7.5rem 1fr; gap: 0.35rem 1rem; }
+    dl.skills dt { font: 0.78rem/1.55 var(--mono); color: var(--muted); padding-top: 0.2rem; }
 
-    .job-desc {
-      margin-top: 0.5rem;
-      font-size: 0.83rem;
-      line-height: 1.72;
-      color: var(--text-mid);
-    }
-
-    .job-dates {
-      font-size: 0.76rem;
-      color: var(--text-soft);
-      white-space: nowrap;
-      text-align: right;
-      padding-top: 0.08rem;
-    }
-
-    /* ── Education / Certs ──────────────────── */
-    .edu-item {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 0.12rem 1.5rem;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(255,255,255,0.5);
-      align-items: start;
-    }
-
-    .edu-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
-
-    /* Same left accent as .job-left, so Experience and Education read
-       as one system rather than two. */
-    .edu-item > div:first-child {
-      border-left: 2px solid rgba(52,184,203,0.30);
-      padding-left: 1rem;
-    }
-
-    .edu-school {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-dark);
-    }
-
-    .edu-field {
-      margin-top: 0.1rem;
-      font-size: 0.81rem;
-      color: var(--text-mid);
-    }
-
-    .edu-dates {
-      font-size: 0.76rem;
-      color: var(--text-soft);
-      white-space: nowrap;
-      text-align: right;
-    }
-
-    .badge {
-      display: inline-block;
-      margin-left: 0.4rem;
-      padding: 0.12rem 0.5rem;
-      background: rgba(52,184,203,0.12);
-      border: 1px solid rgba(52,184,203,0.28);
-      border-radius: 999px;
-      font-size: 0.65rem;
-      font-weight: 500;
-      color: var(--teal);
-      letter-spacing: 0.04em;
-      vertical-align: middle;
-    }
-
-    /* ── Certifications ────────────────── */
-    /* Certs carry no dates and one short line each, so the wide
-       two-column .edu-item row wasted a lot of vertical space on five
-       near-empty records. A card grid packs them two or three across. */
-    .cert-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(228px, 1fr));
-      gap: 0.55rem;
-    }
-
-    .cert {
-      padding: 0.62rem 0.85rem;
-      background: rgba(255,255,255,0.42);
-      border: 1px solid rgba(255,255,255,0.72);
-      border-left: 2px solid rgba(52,184,203,0.38);
-      border-radius: 12px;
-      box-shadow: 0 1px 3px rgba(40,160,185,0.06);
-    }
-
-    .cert-name {
-      font-size: 0.85rem;
-      font-weight: 500;
-      line-height: 1.3;
-      color: var(--text-dark);
-    }
-
-    .cert-desc {
-      margin-top: 0.14rem;
-      font-size: 0.74rem;
-      line-height: 1.5;
-      color: var(--text-soft);
-    }
-
-    /* ── Skills ─────────────────────────────── */
-    .tag-cloud {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .tag {
-      padding: 0.28rem 0.85rem;
-      background: rgba(255,255,255,0.55);
-      border: 1px solid rgba(255,255,255,0.78);
-      border-radius: 999px;
-      font-size: 0.79rem;
-      font-weight: 400;
-      color: var(--text-mid);
-      backdrop-filter: blur(6px);
-      box-shadow: 0 1px 3px rgba(40,160,185,0.07);
-    }
-
-    /* ── Footer ─────────────────────────────── */
-    .footer {
-      padding: 0.9rem 3rem;
-      border-radius: 0 0 26px 26px;
-      border-top: 1px solid rgba(255,255,255,0.48);
-      background: rgba(255,255,255,0.18);
+    footer {
+      margin-top: 3.5rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--rule);
+      font: 0.75rem/1.6 var(--mono);
+      color: var(--muted);
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      gap: 1rem;
     }
 
-    .footer span { font-size: 0.74rem; color: var(--text-soft); }
-
-    .footer a {
-      font-size: 0.74rem;
-      color: var(--text-soft);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .footer a:hover { color: var(--teal); }
-
-    /* ── Berry parallax layer ───────────────── */
+    /* ── Berries ── */
     .berries {
       position: fixed;
-      inset: -80px;
+      inset: -60px;
       pointer-events: none;
       z-index: 0;
-      will-change: transform;
-      transition: transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      transition: transform 1.2s ease-out;
     }
 
     .berry {
       position: absolute;
       image-rendering: pixelated;
-      opacity: 0.5;
-      animation: berry-drift ease-in-out infinite;
+      opacity: 0.55;
+      animation: drift ease-in-out infinite;
     }
 
-    @keyframes berry-drift {
-      0%   { transform: translateY(0px)   rotate(0deg); }
-      30%  { transform: translateY(-16px) rotate(7deg); }
-      70%  { transform: translateY(9px)   rotate(-4deg); }
-      100% { transform: translateY(0px)   rotate(0deg); }
+    @keyframes drift {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-10px) rotate(5deg); }
     }
 
-    .card {
-      position: relative;
-      z-index: 1;
+    @media (prefers-reduced-motion: reduce) {
+      .berry { animation: none; }
+      .berries { transition: none; }
     }
 
-    /* ── Responsive ─────────────────────────── */
-    @media (max-width: 600px) {
-      body { padding: 1.25rem 0.75rem 2.5rem; }
-      .header, .body, .footer { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .name { font-size: 1.9rem; }
-      .job, .edu-item { grid-template-columns: 1fr; }
-      .job-dates, .edu-dates { text-align: left; padding-top: 0.3rem; }
-      .cert-grid { grid-template-columns: 1fr; }
+    @media (max-width: 1000px) {
+      .berries { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; padding: 2.5rem 1rem 3rem; }
+      h1 { font-size: 1.75rem; }
+      .entry, dl.skills { grid-template-columns: 1fr; }
+      .when { padding-top: 0; }
+      dl.skills dd { margin-bottom: 0.5rem; }
+      footer { flex-direction: column; gap: 0.2rem; }
     }
   </style>
 </head>
 <body>
-  <div class="berries" id="berries">
-    <img class="berry" src="/assets/sprites/watmel-berry.png"  style="left:6%;top:8%;width:56px;animation-duration:9s;animation-delay:0s;" alt="">
-    <img class="berry" src="/assets/sprites/oran-berry.png"    style="left:83%;top:11%;width:40px;animation-duration:7s;animation-delay:-2s;" alt="">
-    <img class="berry" src="/assets/sprites/cheri-berry.png"  style="left:92%;top:44%;width:32px;animation-duration:11s;animation-delay:-4s;" alt="">
-    <img class="berry" src="/assets/sprites/rawst-berry.png"  style="left:2%;top:58%;width:48px;animation-duration:8s;animation-delay:-1s;" alt="">
-    <img class="berry" src="/assets/sprites/leppa-berry.png"  style="left:74%;top:76%;width:36px;animation-duration:10s;animation-delay:-3s;" alt="">
-    <img class="berry" src="/assets/sprites/pecha-berry.png"  style="left:17%;top:87%;width:44px;animation-duration:12s;animation-delay:-5s;" alt="">
-    <img class="berry" src="/assets/sprites/sitrus-berry.png" style="left:46%;top:4%;width:38px;animation-duration:9.5s;animation-delay:-7s;" alt="">
-    <img class="berry" src="/assets/sprites/wiki-berry.png"   style="left:91%;top:66%;width:50px;animation-duration:13s;animation-delay:-2s;" alt="">
-    <img class="berry" src="/assets/sprites/watmel-berry.png" style="left:56%;top:90%;width:30px;animation-duration:7.5s;animation-delay:-9s;" alt="">
-    <img class="berry" src="/assets/sprites/oran-berry.png"   style="left:27%;top:18%;width:34px;animation-duration:11s;animation-delay:-6s;" alt="">
-    <img class="berry" src="/assets/sprites/cheri-berry.png"  style="left:4%;top:32%;width:28px;animation-duration:8.5s;animation-delay:-3.5s;" alt="">
-    <img class="berry" src="/assets/sprites/rawst-berry.png"  style="left:68%;top:38%;width:42px;animation-duration:10.5s;animation-delay:-8s;" alt="">
+  <div class="berries" id="berries" aria-hidden="true">
+    <img class="berry" src="/assets/sprites/watmel-berry.png" style="left:7%;top:10%;width:48px;animation-duration:11s" alt="">
+    <img class="berry" src="/assets/sprites/oran-berry.png"   style="left:88%;top:14%;width:36px;animation-duration:9s;animation-delay:-3s" alt="">
+    <img class="berry" src="/assets/sprites/pecha-berry.png"  style="left:5%;top:62%;width:40px;animation-duration:13s;animation-delay:-6s" alt="">
+    <img class="berry" src="/assets/sprites/leppa-berry.png"  style="left:90%;top:70%;width:32px;animation-duration:10s;animation-delay:-2s" alt="">
+    <img class="berry" src="/assets/sprites/sitrus-berry.png" style="left:12%;top:88%;width:30px;animation-duration:12s;animation-delay:-8s" alt="">
   </div>
 
-  <div class="card">
+  <div class="doc">
 
-    <header class="header">
-      <h1 class="name">Penn Cameron Porterfield</h1>
-      <div class="tagline">Senior Cloud &amp; Software Engineer</div>
-      <nav class="contact">
-        <a class="pill" href="mailto:lushfund@protonmail.ch">lushfund@protonmail.ch</a>
-        <a class="pill" href="https://penn.goolz.org" target="_blank" rel="noopener">penn.goolz.org</a>
-        <a class="pill" href="https://github.com/melonmelonz" target="_blank" rel="noopener">github.com/melonmelonz</a>
-        <span class="pill">Eastern Time</span>
-        <a class="pill" href="resume.html">Printable Resume</a>
-        <span class="pill pill-tooltip">No LinkedIn<span class="tooltip-text">Abandoned for OpSec &amp; privacy reasons — reach out directly instead.</span></span>
-      </nav>
+    <header>
+      <h1>Penn Cameron Porterfield</h1>
+      <div class="role">Senior cloud &amp; software engineer</div>
+      <div class="contact">
+        <a href="mailto:lushfund@protonmail.ch">lushfund@protonmail.ch</a> <span class="sep">/</span> <a href="https://penn.goolz.org">penn.goolz.org</a> <span class="sep">/</span> <a href="https://github.com/melonmelonz">github.com/melonmelonz</a> <span class="sep">/</span> US Eastern<br>
+        No LinkedIn on purpose; email is the way to reach me.
+      </div>
     </header>
 
-    <main class="body">
+    <main>
 
-      <section class="section">
-        <h2 class="section-title">Summary</h2>
-        <p class="summary">Senior cloud engineer and full-stack developer with 8+ years of experience across independent consulting, agency work, and venture-backed startups. Focused on cloud architecture, DevOps, and end-to-end delivery of production systems on AWS, Azure, and GCP. Background includes DARPA-funded DoD research, ecommerce, and production work for Google. Holds a B.S. in Network and Cloud Engineering from WGU and is pursuing an M.S. in Computer Science (Computing Systems) at Georgia Tech.</p>
-      </section>
+      <h2>Summary</h2>
+      <p>I've spent 8+ years building software and the cloud infrastructure it runs on, mostly on AWS, Azure, and GCP, as a consultant, at an agency, and at a few startups I helped start. Before that I did DARPA-funded research at Penn State's Applied Research Laboratory. I finished a B.S. in Network and Cloud Engineering at WGU in 2026 and am now in Georgia Tech's M.S. in Computer Science, on the Computing Systems track.</p>
 
-      <section class="section">
-        <h2 class="section-title">Experience</h2>
+      <h2>Experience</h2>
 
-        <div class="job">
-          <div class="job-left">
-            <div class="job-company">Samwise Development</div>
-            <div class="job-role">Founder &mdash; Cloud &amp; Software Consultancy</div>
-            <div class="job-desc">Cloud and software development consultancy serving clients across industries. Full-stack development, cloud infrastructure, and end-to-end project delivery at any scale.</div>
-          </div>
-          <div class="job-dates">2022 &ndash; Present</div>
+      <div class="entry">
+        <div class="when">2022&ndash;now</div>
+        <div class="what">
+          <strong>Samwise Development</strong>, founder
+          <p>My consultancy. I build full-stack applications for clients and set up the cloud infrastructure they run on.</p>
         </div>
+      </div>
 
-        <div class="job">
-          <div class="job-left">
-            <div class="job-company">Google I/O <span class="job-sub">&mdash; Contract</span></div>
-            <div class="job-role">Full Stack Developer &mdash; Remote</div>
-            <div class="job-desc">Shipped production pages for Google I/O via Left Field Labs. Headless Preact with Jinja and Python.</div>
-          </div>
-          <div class="job-dates">2021 &ndash; 2022</div>
+      <div class="entry">
+        <div class="when">2021&ndash;2022</div>
+        <div class="what">
+          <strong>Google I/O</strong> <span class="sub">(contract, remote)</span>, full-stack developer
+          <p>Built production pages for Google I/O through Left Field Labs. Headless Preact, Jinja, Python.</p>
         </div>
+      </div>
 
-        <div class="job">
-          <div class="job-left">
-            <div class="job-company">Distributron</div>
-            <div class="job-role">Software Developer, Co-founder</div>
-            <div class="job-desc">Alcohol delivery ecommerce startup; reached Y Combinator interview. Built with Vue, CSS, HTML, geofencing, and JAMstack architecture.</div>
-          </div>
-          <div class="job-dates">2020 &ndash; 2021</div>
+      <div class="entry">
+        <div class="when">2020&ndash;2021</div>
+        <div class="what">
+          <strong>Distributron</strong>, co-founder and developer
+          <p>Alcohol delivery startup that made it to a Y Combinator interview. Vue front end, geofencing, JAMstack.</p>
         </div>
+      </div>
 
-        <div class="job">
-          <div class="job-left">
-            <div class="job-company">Treetz</div>
-            <div class="job-role">Co-founder &mdash; Indie Game Development</div>
-            <div class="job-desc">Unity mobile game with an 8-bit space theme. Co-led a team of 6 — developers and artists — from concept through production builds.</div>
-          </div>
-          <div class="job-dates">2019 &ndash; 2020</div>
+      <div class="entry">
+        <div class="when">2019&ndash;2020</div>
+        <div class="what">
+          <strong>Treetz</strong>, co-founder
+          <p>Indie studio. We made an 8-bit space game for mobile in Unity; I co-led the team of six developers and artists from first concept to production builds.</p>
         </div>
+      </div>
 
-        <div class="job">
-          <div class="job-left">
-            <div class="job-company">Safety+</div>
-            <div class="job-role">Software Developer</div>
-            <div class="job-desc">React SPA built on Firebase for real-time factory safety incident tracking. Initial clients included Coca-Cola.</div>
-          </div>
-          <div class="job-dates">2019 &ndash; 2020</div>
+      <div class="entry">
+        <div class="when">2019&ndash;2020</div>
+        <div class="what">
+          <strong>Safety+</strong>, software developer
+          <p>React and Firebase app for logging factory safety incidents in real time. Coca-Cola was one of the first clients.</p>
         </div>
+      </div>
 
-        <div class="job">
-          <div class="job-left">
-            <div class="job-company">1SEO Digital Agency <span class="job-sub">&mdash; Philadelphia</span></div>
-            <div class="job-role">Developer</div>
-            <div class="job-desc">Multi-client agency across WordPress, Drupal, Joomla, and Magento. React, Vue, ES6+.</div>
-          </div>
-          <div class="job-dates">2018 &ndash; 2019</div>
+      <div class="entry">
+        <div class="when">2018&ndash;2019</div>
+        <div class="what">
+          <strong>1SEO Digital Agency</strong> <span class="sub">(Philadelphia)</span>, developer
+          <p>Client sites on WordPress, Drupal, Joomla, and Magento, with React and Vue where they fit.</p>
         </div>
+      </div>
 
-        <div class="job">
-          <div class="job-left">
-            <div class="job-company">PSU Applied Research Laboratory</div>
-            <div class="job-role">Data Analyst</div>
-            <div class="job-desc">DARPA-funded research in the Underwater Acoustics Department. Held a DoD Secret clearance (since lapsed). Data analytics and MATLAB for autonomous underwater vehicle systems.</div>
-          </div>
-          <div class="job-dates">2010 &ndash; 2013</div>
+      <div class="entry">
+        <div class="when">2010&ndash;2013</div>
+        <div class="what">
+          <strong>Penn State Applied Research Laboratory</strong>, data analyst
+          <p>Underwater Acoustics Department, on DARPA-funded work. Data analysis in MATLAB for autonomous underwater vehicles. Held a DoD Secret clearance (since lapsed).</p>
         </div>
+      </div>
 
-      </section>
+      <h2>Education</h2>
 
-      <section class="section">
-        <h2 class="section-title">Education</h2>
+      <div class="entry">
+        <div class="when">in progress</div>
+        <div class="what"><strong>Georgia Institute of Technology</strong><br>M.S. Computer Science, Computing Systems</div>
+      </div>
 
-        <div class="edu-item">
-          <div>
-            <div class="edu-school">Georgia Institute of Technology</div>
-            <div class="edu-field">M.S. Computer Science &mdash; Computing Systems <span class="badge">In Progress</span></div>
-          </div>
-          <div class="edu-dates">Present</div>
-        </div>
+      <div class="entry">
+        <div class="when">2026</div>
+        <div class="what"><strong>Western Governors University</strong><br>B.S. Network and Cloud Engineering</div>
+      </div>
 
-        <div class="edu-item">
-          <div>
-            <div class="edu-school">Western Governors University</div>
-            <div class="edu-field">B.S. Network and Cloud Engineering</div>
-          </div>
-          <div class="edu-dates">Graduated 2026</div>
-        </div>
+      <div class="entry">
+        <div class="when">2011&ndash;2014</div>
+        <div class="what"><strong>The Pennsylvania State University</strong><br>Coursework in Computer Engineering and Security &amp; Risk Analysis</div>
+      </div>
 
-        <div class="edu-item">
-          <div>
-            <div class="edu-school">The Pennsylvania State University</div>
-            <div class="edu-field">Computer Engineering &amp; Security and Risk Analysis <span class="badge">Coursework</span></div>
-          </div>
-          <div class="edu-dates">2011 &ndash; 2014</div>
-        </div>
+      <h2>Certifications</h2>
+      <ul class="plain">
+        <li>CompTIA Security+</li>
+        <li>CompTIA Network+</li>
+        <li>CompTIA A+</li>
+        <li>ITIL 4 Foundation</li>
+        <li>LPI Linux Essentials</li>
+      </ul>
 
-      </section>
+      <h2>Skills</h2>
+      <dl class="skills">
+        <dt>systems</dt>  <dd>Rust, C, Linux kernel, embedded (SPI)</dd>
+        <dt>web</dt>      <dd>TypeScript, React, Vue, PHP/Laravel, Python</dd>
+        <dt>cloud</dt>    <dd>AWS, Azure, GCP, Cloudflare, Kubernetes</dd>
+        <dt>other</dt>    <dd>Unity, MATLAB</dd>
+      </dl>
 
-      <section class="section">
-        <h2 class="section-title">Certifications</h2>
-        <div class="cert-grid">
-          <div class="cert">
-            <div class="cert-name">CompTIA Security+</div>
-            <div class="cert-desc">Security &amp; risk management</div>
-          </div>
-          <div class="cert">
-            <div class="cert-name">CompTIA Network+</div>
-            <div class="cert-desc">Network infrastructure &amp; operations</div>
-          </div>
-          <div class="cert">
-            <div class="cert-name">CompTIA A+</div>
-            <div class="cert-desc">Hardware &amp; software fundamentals</div>
-          </div>
-          <div class="cert">
-            <div class="cert-name">ITIL 4 Foundation</div>
-            <div class="cert-desc">IT service management</div>
-          </div>
-          <div class="cert">
-            <div class="cert-name">LPI Linux Essentials</div>
-            <div class="cert-desc">Linux fundamentals &amp; open source</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2 class="section-title">Skills</h2>
-        <div class="tag-cloud">
-          <span class="tag">Rust</span>
-          <span class="tag">C</span>
-          <span class="tag">Systems Programming</span>
-          <span class="tag">Linux Kernel</span>
-          <span class="tag">Embedded / SPI</span>
-          <span class="tag">TypeScript</span>
-          <span class="tag">React</span>
-          <span class="tag">Vue</span>
-          <span class="tag">PHP / Laravel</span>
-          <span class="tag">Python</span>
-          <span class="tag">AWS</span>
-          <span class="tag">Azure</span>
-          <span class="tag">GCP</span>
-          <span class="tag">Cloudflare</span>
-          <span class="tag">Kubernetes</span>
-          <span class="tag">Unity</span>
-          <span class="tag">MATLAB</span>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2 class="section-title">Interests</h2>
-        <div class="tag-cloud">
-          <span class="tag">Music</span>
-          <span class="tag">Travel</span>
-          <span class="tag">Cooking</span>
-        </div>
-      </section>
+      <h2>Outside work</h2>
+      <p>Music, travel, cooking.</p>
 
     </main>
 
-    <footer class="footer">
-      <span>Penn Cameron Porterfield &mdash; 2026</span>
-      <a href="resume.html">printable resume &darr;</a>
+    <footer>
+      <span>Updated 2026</span>
+      <a href="resume.html">One-page printable resume</a>
     </footer>
 
   </div>
   <script>
     const layer = document.getElementById('berries');
     document.addEventListener('mousemove', e => {
-      const x = (e.clientX / window.innerWidth  - 0.5) * 14;
-      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      const x = (e.clientX / innerWidth  - 0.5) * 12;
+      const y = (e.clientY / innerHeight - 0.5) * 8;
       layer.style.transform = `translate(${x}px, ${y}px)`;
     });
   </script>
