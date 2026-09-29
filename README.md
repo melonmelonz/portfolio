@@ -6,7 +6,7 @@ Live at **[penn.goolz.org](https://penn.goolz.org)** — resume at [penn.goolz.o
 
 ## Stack
 
-Static site — vanilla HTML/CSS/JS, no build step. Hosted on Cloudflare Pages
+Static site in `site/` — vanilla HTML/CSS/JS, no build step. Hosted on Cloudflare Pages
 (project `penn-portfolio`).
 
 ## Deploy
@@ -16,5 +16,5 @@ Pushes to `main` auto-deploy via GitHub Actions (`.github/workflows/deploy.yml`)
 Manual:
 
 ```sh
-npx wrangler pages deploy . --project-name=penn-portfolio
+npx wrangler pages deploy site --project-name=penn-portfolio
 ```
