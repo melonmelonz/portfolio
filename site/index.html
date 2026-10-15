@@ -1,358 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Penn Cameron Porterfield</title>
-  <meta name="description" content="Senior cloud & software engineer. FOSS advocate. Architecting and shipping production systems end to end.">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="/assets/sprites/watmel-berry.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Penn Cameron Porterfield</title>
+<meta name="description" content="Penn Cameron Porterfield. Systems and infrastructure engineer. Linux, C, Rust, kernel and driver work, with eight years of full-stack and cloud work behind it.">
+<link rel="icon" href="/assets/sprites/watmel-berry.png">
+<style>
+body { background: #000; color: #ccc; margin: 1.5em; max-width: 46em; line-height: 1.45; }
+a:link { color: #7ab8ff; }
+a:visited { color: #b394e0; }
+h1 { font-size: 1.4em; margin: 0; }
+h2 { font-size: 1.05em; margin: 2em 0 .4em; }
+hr { border: 0; border-top: 1px solid #333; margin: 1.6em 0; }
+ul { padding-left: 1.4em; }
+li { margin-bottom: .4em; }
+img.photo { float: right; margin: 0 0 1em 1.5em; border: 1px solid #333; }
+small { color: #888; }
+
+/* the one indulgence */
+#boot95 { position: fixed; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 8px;
+  padding: 7px 10px; text-decoration: none; background: #c0c0c0; color: #000;
+  font-family: Tahoma, "MS Sans Serif", sans-serif; font-size: 12px;
+  border-top: 2px solid #fff; border-left: 2px solid #fff;
+  border-right: 2px solid #404040; border-bottom: 2px solid #404040; }
+#boot95:link, #boot95:visited { color: #000; }
+#boot95 b { letter-spacing: .3px; }
+#boot95 i { width: 34px; height: 16px; background: #808080; position: relative;
+  border-top: 2px solid #404040; border-left: 2px solid #404040;
+  border-right: 2px solid #fff; border-bottom: 2px solid #fff; }
+#boot95 i::after { content: ""; position: absolute; top: 0; left: 0; width: 14px; height: 12px;
+  background: #c0c0c0; border-top: 1px solid #fff; border-left: 1px solid #fff;
+  border-right: 1px solid #404040; border-bottom: 1px solid #404040; }
+#boot95:hover i::after { left: 18px; }
+</style>
 </head>
 <body>
 
-<div id="page-front">
+<img class="photo" src="me_and_noogs_optimized.jpg" width="150" height="188" alt="Penn and his dog Noogs">
 
-  <!-- Nav -->
-  <nav>
-    <a href="#top" class="nav-brand">
-      <img src="/assets/sprites/watmel-berry.png" width="20" height="20" alt="melon" style="image-rendering: pixelated;">
-      <span>pcporterfield</span>
-    </a>
+<h1>Penn Cameron Porterfield</h1>
 
-    <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+<p>I work on systems. Linux, C, and Rust.
 
-    <ul class="nav-links">
-      <li><a href="#about">about</a></li>
-      <li><a href="#projects">projects</a></li>
-      <li><a href="#stack">stack</a></li>
-      <li><a href="#certs">certs</a></li>
-      <li><a href="#education">education</a></li>
-      <li><a href="#contact">contact</a></li>
-      <li><a href="/cv">resume</a></li>
-      <li><a href="/booking">book</a></li>
-      <li><a href="/desktop" class="nav-95">win95</a></li>
-    </ul>
-  </nav>
+<p>I am in the M.S. Computer Science program at Georgia Tech, on the computing systems track.
+Alongside it I am writing a Rust SPI display driver for a BeaglePlay against the Rust for Linux
+tree, with DOOM on a 2.4 inch panel as the target. The panel is still dark. The logic analyzer says
+the init sequence is right and that a mode pin is being held high, so that is the next thing to
+fix.
 
-  <!-- Hero -->
-  <section class="hero" id="top">
-    <div class="hero-header">From: PCP &lt;penn@goolz.org&gt;
-Date: 2026
-Subject: greetings</div>
-    <h1>Penn Cameron Porterfield</h1>
-    <p class="subtitle">senior cloud & software engineer</p>
-    <p class="tagline">i architect and ship production systems end to end — from the application layer down to the cloud infrastructure under it. clean code, straight from the terminal.</p>
-    <div class="hero-buttons">
-      <a href="/booking" class="btn btn-primary">book time</a>
-      <a href="https://github.com/melonmelonz" class="btn btn-ghost" target="_blank" rel="noopener">github</a>
-      <a href="/cv" class="btn btn-ghost">resume</a>
-      <a href="#contact" class="btn btn-ghost">contact</a>
-    </div>
-  </section>
+<p>The rest of my own code is privacy tooling.
+<a href="https://github.com/melonmelonz/monero-multisig">monero-multisig</a> is an M-of-N Monero
+multisig wallet CLI in Rust: key exchange, co-signing, submission. Tor, Whonix and key handling are
+a standing interest.
 
-  <hr class="divider">
+<p>Before systems I spent eight years on full-stack and cloud work, including the production pages
+for Google I/O, and I still run Samwise Development, my consultancy. B.S. in Network and Cloud
+Engineering from WGU in 2026. CompTIA Security+, CompTIA Network+, ITIL 4 Foundation. Before any of
+that I studied computer engineering and security and risk analysis at Penn State and worked at its
+Applied Research Laboratory on DARPA-funded underwater acoustics for autonomous vehicles, which was
+classified DoD work on a Secret clearance that has since lapsed.
 
-  <!-- About -->
-  <section id="about">
-    <h2 class="section-title">about</h2>
-    <p class="about-text">
-      senior engineer with over a decade in technical roles, shipping production software end to end — from application code to the <span class="highlight">cloud infrastructure on AWS, Azure, and GCP</span> underneath it. i design for clean architecture, operational resilience, and systems that outlast the sprint that built them. deep in <span class="highlight">cloud, DevOps, and systems programming</span>. foss contributor, linux daily driver (<span class="highlight">i use gentoo, btw</span>), and firm believer that the terminal is the best IDE.
-    </p>
-    <picture>
-      <source srcset="me_and_noogs.webp" type="image/webp">
-      <img src="me_and_noogs_optimized.jpg" alt="me and noogs" class="about-photo" loading="lazy">
-    </picture>
-  </section>
+<p><a href="mailto:penn@goolz.org">penn@goolz.org</a> &middot;
+<a href="https://github.com/melonmelonz">github</a> &middot;
+<a href="/cv">CV</a> &middot;
+<a href="/booking">book a call</a>
 
-  <hr class="divider">
+<hr>
 
-  <!-- Projects -->
-  <section id="projects">
-    <h2 class="section-title">projects</h2>
-    <div class="projects-list">
-      <a href="https://samwise.goolz.org" class="project-item" target="_blank" rel="noopener">
-        <span class="project-name">samwise development</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">cloud & software consultancy. full-stack, infra, and everything in between.</span>
-        <span class="project-tag">[consulting]</span>
-      </a>
-      <a href="https://els911.com" class="project-item" target="_blank" rel="noopener">
-        <span class="project-name">els911</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">school safety infrastructure. lidar scans of k-12 buildings turned into floor plans police, fire, and ems can open in seconds. current.</span>
-        <span class="project-tag">[lidar/gis]</span>
-      </a>
-      <span class="project-item">
-        <span class="project-name">google i/o</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">production pages for google's annual developer conference via left field labs. headless preact + jinja/python.</span>
-        <span class="project-tag">[preact/python]</span>
-      </span>
-      <span class="project-item">
-        <span class="project-name">distributron</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">alcohol delivery ecommerce startup. geofencing, jamstack, y combinator interview.</span>
-        <span class="project-tag">[vue/jamstack]</span>
-      </span>
-      <a href="https://treetz.pages.dev" class="project-item" target="_blank" rel="noopener">
-        <span class="project-name">treetz</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">unity mobile game with an 8-bit space theme. co-led a team of 6 — devs and artists — from concept through production builds.</span>
-        <span class="project-tag">[unity]</span>
-      </a>
-      <a href="https://github.com/melonmelonz/monero-multisig" class="project-item" target="_blank" rel="noopener">
-        <span class="project-name">monero-multisig</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">M-of-N multisig wallet CLI. key exchange, co-signing, submission.</span>
-        <span class="project-tag">[rust]</span>
-      </a>
-    </div>
-  </section>
+<p><small>Last update: October 15, 2026.
+<a href="/secret/"><img src="/assets/sprites/watmel-berry.png" width="16" height="16" alt=""
+style="image-rendering:pixelated;vertical-align:-3px"></a></small>
 
-  <hr class="divider">
+<a id="boot95" href="/desktop" title="Boot the Windows 95 edition of this site"><b>boot&nbsp;'95</b><i></i></a>
 
-  <!-- Stack -->
-  <section id="stack">
-    <h2 class="section-title">stack</h2>
-    <p class="stack-text">
-      <span>TypeScript</span> <span class="sep">/</span>
-      <span>React</span> <span class="sep">/</span>
-      <span>Python</span> <span class="sep">/</span>
-      <span>Rust</span> <span class="sep">/</span>
-      <span>PHP / Laravel</span> <span class="sep">/</span>
-      <span>AWS</span> <span class="sep">/</span>
-      <span>Azure</span> <span class="sep">/</span>
-      <span>GCP</span> <span class="sep">/</span>
-      <span>Kubernetes</span> <span class="sep">/</span>
-      <span>Cloud Architecture</span> <span class="sep">/</span>
-      <span>Distributed Systems</span>
-    </p>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Certifications -->
-  <section id="certs">
-    <h2 class="section-title">certifications</h2>
-    <div class="projects-list">
-      <span class="project-item">
-        <span class="project-name">comptia security+</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">security fundamentals and risk management</span>
-        <span class="project-tag">[certified]</span>
-      </span>
-      <span class="project-item">
-        <span class="project-name">comptia network+</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">network infrastructure, protocols, and operations</span>
-        <span class="project-tag">[certified]</span>
-      </span>
-      <span class="project-item">
-        <span class="project-name">itil 4 foundation</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">it service management</span>
-        <span class="project-tag">[certified]</span>
-      </span>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Education -->
-  <section id="education">
-    <h2 class="section-title">education</h2>
-    <div class="projects-list">
-      <span class="project-item">
-        <span class="project-name">georgia tech</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">m.s. computer science, computing systems</span>
-        <span class="project-tag">[in progress]</span>
-      </span>
-      <span class="project-item">
-        <span class="project-name">western governors university</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">b.s. network and cloud engineering</span>
-        <span class="project-tag">[2026]</span>
-      </span>
-      <span class="project-item">
-        <span class="project-name">penn state</span>
-        <span class="project-sep">--</span>
-        <span class="project-desc">computer engineering and security &amp; risk analysis</span>
-        <span class="project-tag">[coursework]</span>
-      </span>
-    </div>
-  </section>
-
-  <hr class="divider">
-
-  <!-- Contact -->
-  <section id="contact" class="contact">
-    <h2 class="section-title">contact</h2>
-    <p>interested in working together or just want to say hey? <a href="/booking" style="color:var(--amber)">book a time &#10148;</a></p>
-    <div class="contact-links">
-      <a href="mailto:penn@goolz.org">penn@goolz.org</a>
-      <span class="sep">|</span>
-      <a href="https://github.com/melonmelonz" target="_blank" rel="noopener">github.com/melonmelonz</a>
-      <span class="sep">|</span>
-      <a href="https://samwise.goolz.org" target="_blank" rel="noopener">samwise.goolz.org</a>
-      <span class="sep">|</span>
-      <span style="opacity:0.55;" title="OpSec &amp; privacy — intentionally not on LinkedIn">no linkedin (opsec)</span>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    -- end of message --
-  </footer>
-  <!-- no linkedin. intentional. opsec & privacy. if you're looking, reach out directly. -->
-
-</div><!-- #page-front -->
-
-<div id="page-back">
-  <div class="falling-stars-container" aria-hidden="true">
-    <span class="falling-star">✦</span>
-    <span class="falling-star">★</span>
-    <span class="falling-star">✦</span>
-    <span class="falling-star">★</span>
-    <span class="falling-star">✦</span>
-    <span class="falling-star">★</span>
-    <span class="falling-star">✦</span>
-    <span class="falling-star">★</span>
-  </div>
-
-  <div class="back-inner">
-    <p class="rainbow-heading">~*~ MY SECRET PAGE ~*~</p>
-    <marquee behavior="scroll" direction="left">&#9733; YOU FOUND THE SECRET PAGE &#9733; &nbsp;&nbsp;&nbsp; welcome 2 my corner of the web &nbsp;&nbsp;&nbsp; &#9733; YOU FOUND THE SECRET PAGE &#9733; &nbsp;&nbsp;&nbsp; welcome 2 my corner of the web &nbsp;&nbsp;&nbsp;</marquee>
-
-    <div class="gif-strip">
-      <img src="/assets/sprites/183.gif" alt="Marill" title="Marill">
-      <img src="/assets/sprites/202.gif" alt="Wobbuffet" title="Wobbuffet">
-      <img src="/assets/sprites/113.gif" alt="Chansey" title="Chansey">
-      <img src="/assets/sprites/131.gif" alt="Lapras" title="Lapras">
-      <img src="/assets/sprites/79.gif" alt="Slowpoke" title="Slowpoke">
-    </div>
-
-    <div class="retro-badges">
-      <span class="blink">&#128679; UNDER CONSTRUCTION &#128679;</span>
-      <span>visitors: 001337</span>
-    </div>
-
-    <div class="retro-badge-strip">
-      <span class="retro-badge badge-ie">Best Viewed in<br>Internet Explorer 4.0</span>
-      <span class="retro-badge badge-notepad">Made with<br>Notepad</span>
-      <span class="retro-badge badge-resolution">800&times;600<br>or better</span>
-      <span class="retro-badge badge-html">HTML 3.2<br>Compliant</span>
-    </div>
-
-    <marquee behavior="scroll" direction="right" class="marquee-bottom">&#128293; BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 &#128293; &nbsp;&nbsp;&nbsp; 800x600 RESOLUTION REQUIRED &nbsp;&nbsp;&nbsp; &#128293; BEST VIEWED IN NETSCAPE NAVIGATOR 4.0 &#128293;</marquee>
-
-    <div class="back-blog">
-      <h2>~* MY BLOG *~</h2>
-      <article class="blog-post">
-        <h3>There and back again: a PVM story</h3>
-        <img src="pvm-pl1.png" alt="PVM" class="blog-img" loading="lazy">
-        <p><em>coming soon...</em></p>
-      </article>
-    </div>
-
-    <div class="back-guestbook">
-      <h2>&#128100; GUESTBOOK &#128100;</h2>
-      <div class="gb-entry">
-        <div class="gb-header">
-          <span class="gb-name">xX_CoolGuy99_Xx</span>
-          <span class="gb-date">04/20/1999</span>
-        </div>
-        <p class="gb-msg">omg kewl site!!!! ur html skillz r 2 die 4 &#128293; bookmarked 4ever!!!</p>
-      </div>
-      <div class="gb-entry">
-        <div class="gb-header">
-          <span class="gb-name">sparkleprincess2001</span>
-          <span class="gb-date">07/07/1999</span>
-        </div>
-        <p class="gb-msg">hiiiii!! luv ur pokemanz :3 add me 2 ur links page plz!! ~*~ xoxo ~*~</p>
-      </div>
-      <div class="gb-entry">
-        <div class="gb-header">
-          <span class="gb-name">PokeFan_2000</span>
-          <span class="gb-date">12/31/1999</span>
-        </div>
-        <p class="gb-msg">HAPPY Y2K!!!! nice site :D ur marill iz adorable lolol!!!</p>
-      </div>
-    </div>
-
-    <div class="webring">
-      <p class="webring-title">&#9670; pcporterfield's Cool Site Ring &#9670;</p>
-      <div class="webring-nav">
-        <button class="webring-btn">&#9668; Prev</button>
-        <button class="webring-btn">&#127968; Home</button>
-        <button class="webring-btn">&#9632; Random</button>
-        <button class="webring-btn">Next &#9658;</button>
-      </div>
-    </div>
-
-    <button id="btn-flip-back">&#9668; back to normal</button>
-  </div>
-
-  <div id="retro-clock">
-    <div class="clock-titlebar">&#128336; Clock</div>
-    <div class="clock-body">
-      <div id="clock-time">12:00:00 PM</div>
-      <div id="clock-date">Mon 01/01/99</div>
-    </div>
-  </div>
-
-  <div id="aim-widget">
-    <div class="aim-titlebar">
-      <span>&#127939; Buddy List</span>
-      <button class="aim-close-btn" id="aim-close">&#x2715;</button>
-    </div>
-    <div class="aim-body">
-      <div class="aim-group">Online (1/2)</div>
-      <div class="aim-buddy">
-        <span>&#9786;</span> x0x_webmaster_x0x
-      </div>
-      <div class="aim-away-msg">Away: brb gettin pizza lol</div>
-      <div class="aim-group" style="margin-top:4px;">Away (1/2)</div>
-      <div class="aim-buddy">
-        <span>&#128308;</span> sparkleprincess2001
-      </div>
-      <div class="aim-away-msg">brb, defragging</div>
-    </div>
-    <div class="aim-footer">
-      <button class="aim-btn" id="aim-im-btn">IM</button>
-      <button class="aim-btn" id="aim-setup-btn">Setup</button>
-    </div>
-  </div>
-
-</div>
-
-  <!-- Win95 mode switch -->
-  <a id="win95-switch" href="/desktop" title="Boot the Windows 95 edition of this site" aria-label="Switch to Windows 95 desktop mode">
-    <span class="w95-screen">🖥️</span>
-    <span class="w95-label">boot&nbsp;'95</span>
-    <span class="w95-toggle"><span class="w95-knob"></span></span>
-  </a>
-  <style>
-    #win95-switch{
-      position:fixed; right:16px; bottom:16px; z-index:900;
-      display:flex; align-items:center; gap:8px;
-      padding:7px 10px; text-decoration:none;
-      font-family:'Tahoma','MS Sans Serif',Arial,sans-serif; font-size:12px; color:#000;
-      background:#c0c0c0;
-      border-top:2px solid #fff; border-left:2px solid #fff;
-      border-right:2px solid #404040; border-bottom:2px solid #404040;
-      box-shadow:2px 2px 0 rgba(0,0,0,.4);
-    }
-    #win95-switch:active{ border-top:2px solid #404040; border-left:2px solid #404040; border-right:2px solid #fff; border-bottom:2px solid #fff; }
-    #win95-switch .w95-label{ font-weight:bold; letter-spacing:.3px; }
-    #win95-switch .w95-toggle{ width:34px; height:16px; background:#808080; position:relative;
-      border-top:2px solid #404040; border-left:2px solid #404040; border-right:2px solid #fff; border-bottom:2px solid #fff; }
-    #win95-switch .w95-knob{ position:absolute; top:0; left:0; width:14px; height:12px; background:#c0c0c0;
-      border-top:1px solid #fff; border-left:1px solid #fff; border-right:1px solid #404040; border-bottom:1px solid #404040;
-      transition:left .15s steps(3); }
-    #win95-switch:hover .w95-knob{ left:18px; }
-    @media (max-width:640px){ #win95-switch .w95-label{ display:none; } }
-  </style>
-  <script src="script.js"></script>
 </body>
 </html>
