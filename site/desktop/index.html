@@ -217,13 +217,15 @@
   <div class="win-body">
     <img src="/me_and_noogs_optimized.jpg" alt="Penn" class="photo out">
     <h2 class="wh">Penn Cameron Porterfield</h2>
-    <p><b>Senior Cloud &amp; Software Engineer</b></p>
-    <p>Senior engineer with over a decade in technical roles, shipping production software end to end — from
-    application code to the cloud infrastructure on AWS, Azure, and GCP underneath it.
-    I design for clean architecture, operational resilience, and systems that outlast
-    the sprint that built them.</p>
-    <p>Deep in cloud, DevOps, and systems programming. FOSS contributor, Linux daily
-    driver (I use Gentoo, btw), and a firm believer that the terminal is the best IDE.</p>
+    <p><b>Systems Engineer</b></p>
+    <p>I work on systems. Linux, C, and Rust: drivers, embedded targets, and low-level
+    programming. I am steadily moving the rest of my work down the stack.</p>
+    <p>Before that, eight years of full-stack and cloud work, including production pages
+    for Google I/O. I run Samwise Development, my cloud and software consultancy. Earlier,
+    DARPA-funded work at Penn State's Applied Research Laboratory on a Secret clearance
+    that has since lapsed.</p>
+    <p>Georgia Tech, M.S. Computer Science (Computing Systems), starts fall 2027.
+    B.S. Network and Cloud Engineering, WGU, 2027.</p>
     <div><span class="btn" data-open="projects">Projects</span> &nbsp;
       <span class="btn" data-href="/cv">Résumé</span> &nbsp;
       <span class="btn" data-href="/booking">Book time</span></div>
@@ -512,8 +514,9 @@ function tick(){
 setInterval(tick, 1000); tick();
 
 /* ── Stack tags ─────────────────────────────── */
-['TypeScript','React','Python','Rust','PHP / Laravel','AWS','Azure','GCP',
- 'Kubernetes','Cloud Architecture','Distributed Systems'].forEach(t => {
+['C','Rust','Linux','Systems Programming','Device Drivers','Embedded',
+ 'AWS','Azure','GCP','Kubernetes','Cloud Architecture','Distributed Systems',
+ 'TypeScript','React','Python','PHP / Laravel'].forEach(t => {
   const s = document.createElement('span'); s.className = 'tag'; s.textContent = t;
   document.getElementById('stacktags').appendChild(s);
 });
