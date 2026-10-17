@@ -7,7 +7,8 @@
 <meta name="description" content="Penn Cameron Porterfield. Systems and infrastructure engineer. Linux, C, Rust, kernel and driver work, with eight years of full-stack and cloud work behind it.">
 <link rel="icon" href="/assets/sprites/watmel-berry.png">
 <style>
-body { background: #000; color: #ccc; margin: 1.5em; max-width: 46em; line-height: 1.45; }
+body { background: #000; color: #ccc; margin: 2.5em auto 5em; padding: 0 1.5em;
+       max-width: 40em; line-height: 1.5; }
 a:link { color: #7ab8ff; }
 a:visited { color: #b394e0; }
 h1 { font-size: 1.4em; margin: 0; }
@@ -17,6 +18,15 @@ ul { padding-left: 1.4em; }
 li { margin-bottom: .4em; }
 img.photo { float: right; margin: 0 0 1em 1.5em; border: 1px solid #333; }
 small { color: #888; }
+
+@media (min-width: 1600px) { body { font-size: 18px; } }
+@media (min-width: 2200px) { body { font-size: 20px; } }
+
+/* narrow screens: the floated photo leaves too little room for a line of text */
+@media (max-width: 34em) {
+  body { margin-top: 1.5em; }
+  img.photo { float: none; display: block; margin: 0 0 1.2em; }
+}
 
 /* the one indulgence */
 #boot95 { position: fixed; right: 16px; bottom: 16px; display: flex; align-items: center; gap: 8px;
@@ -37,9 +47,9 @@ small { color: #888; }
 </head>
 <body>
 
-<img class="photo" src="me_and_noogs_optimized.jpg" width="150" height="188" alt="Penn and his dog Noogs">
-
 <h1>Penn Cameron Porterfield</h1>
+
+<img class="photo" src="me_and_noogs_optimized.jpg" width="150" height="188" alt="Penn and his dog Noogs">
 
 <p>I work on systems. Linux, C, and Rust.
 
